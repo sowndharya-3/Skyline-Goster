@@ -1,0 +1,66 @@
+{
+  "created": "2026-09-08",
+  "notes": "Original generated campaign and product concept imagery for the user's supplied redesign reference. Existing user-supplied logo used as brand reference where indicated. JPEG copies for web delivery; source generations retained.",
+  "assets": [
+    {
+      "file": "public/assets/campaign-hero.jpg",
+      "method": "OpenAI built-in image generation",
+      "prompt": "Use case: photorealistic-natural. Asset type: full-bleed 16:9 website hero photograph for GHOSTER dark streetwear brand. Create a cinematic editorial photograph of an athletic adult man viewed from behind, head turned slightly down, in an oversized black cotton T-shirt with the attached distressed white G/skull emblem printed large on the back (logo is reference only, use the white emblem without the tricolor or words). Man occupies right half, cropped at upper thighs, weathered concrete wall on right, dark wooded ravine on left. Left half is dark atmospheric negative space for real HTML typography. Monochrome charcoal with tiny muted olive undertones, natural hard side lighting revealing cotton texture, moody realistic fashion photography, deep blacks but visible subject details, subtle film grain. No headings, no captions, no website UI, no extra typography, no watermarks. Wide landscape image."
+    },
+    {
+      "file": "public/assets/campaign-army.jpg",
+      "method": "OpenAI built-in image generation",
+      "prompt": "Use case: photorealistic-natural. Asset: wide cinematic website banner photograph, 16:9. A solitary adult man in dark tactical outdoors clothing with a backpack, viewed from behind at the right third of frame, facing rugged forested mountain valley in mist, rocky path foreground. Monochrome near-black and charcoal with restrained olive shadows. Natural texture, fine film grain, realistic campaign photography, left half dark landscape negative space for HTML text. No weapons, no text, no watermark."
+    },
+    {
+      "file": "public/assets/campaign-gamer.jpg",
+      "method": "OpenAI built-in image generation",
+      "prompt": "Use case: photorealistic-natural. Asset: dark streetwear lifestyle tile, landscape 4:3. Close three-quarter rear view of an adult gamer in black T-shirt and over-ear gaming headphones, seated at a dark desk, subtle monitor light outlining head and shoulders. Almost monochrome charcoal and muted olive, atmospheric haze, cinematic high contrast yet visible textures. Person in right half, negative dark space lower left for HTML heading. No text, no branding, no watermark."
+    },
+    {
+      "file": "public/assets/campaign-biker.jpg",
+      "method": "OpenAI built-in image generation",
+      "prompt": "Use case: photorealistic-natural. Asset: dark streetwear editorial photograph, landscape 4:3. An adult biker wearing a black full-face helmet, black riding jacket and gloves, sitting on a black cafe racer motorcycle on a rugged misty mountain road. Three-quarter front angle, strong silhouette, mountains behind. Monochrome charcoal with muted olive undertones, cinematic directional lighting, premium editorial photo, film grain, subject on right half. No text, no watermark."
+    },
+    {
+      "file": "public/assets/campaign-about.jpg",
+      "method": "OpenAI built-in image generation",
+      "prompt": "Use case: photorealistic-natural. Asset: dark streetwear brand story hero photograph, landscape 16:9. Portrait of an adult in a black oversized hoodie, hood up, face mostly concealed in deep shadow with a subtle dark skull-pattern face covering, torso fills right half. Weathered black concrete background, moody dramatic soft rim lighting and subtle film grain. The left half is black negative space for web typography. Premium realistic monochrome charcoal fashion campaign, no text, no watermark."
+    },
+    {
+      "file": "public/assets/campaign-packaging.jpg",
+      "method": "OpenAI built-in image generation",
+      "prompt": "Use case: product-mockup. Asset: cinematic wide 16:9 GHOSTER streetwear packaging photograph. On dark weathered concrete, an open premium matte-black rectangular apparel box with black tissue wrapping, folded black oversized cotton T-shirt, branded hang tags, and small thank-you card. Arrange all objects toward the right two-thirds, left third is dark empty concrete. Use attached white G/skull emblem on box, hangtag and shirt with accurate distressed geometry, omit the colored stripes. Small wordmark GHOSTER on box; thank-you card says THANK YOU, SOLDIER. Realistic tactile black materials, charcoal highlights, muted olive details, hard angled editorial lighting. No other text, no watermark."
+    },
+    {
+      "file": "public/assets/product-shadow.jpg",
+      "method": "OpenAI built-in image generation",
+      "prompt": "Use case: product-mockup. Asset: premium e-commerce product photograph for GHOSTER, vertical 4:5. One black heavyweight oversized short sleeve crew-neck cotton T-shirt on an invisible mannequin, centered and entire garment visible with generous margin, shoulders broad, sleeves relaxed. Front view, small understated light grey GHOSTER wordmark horizontally on center chest. No other chest graphic. Attached image is brand graphic reference only, keep geometry of any G skull emblem consistent, omit tricolor. Deep charcoal textured concrete studio background with subtle directional light from upper left, matte tactile cotton, realistic folds and natural volume, sophisticated black-on-black tonal separation. Consistent catalog lighting, no model, no hanger, no props, no price or headings or watermarks."
+    },
+    {
+      "file": "public/assets/product-eclipse.jpg",
+      "method": "OpenAI built-in image generation",
+      "prompt": "Use case: product-mockup. Asset: premium e-commerce product photograph for GHOSTER, vertical 4:5. One black heavyweight oversized short sleeve crew-neck cotton T-shirt on an invisible mannequin, centered and entire garment visible with generous margin, shoulders broad, sleeves relaxed. Front view, very large dark charcoal tonal distressed G skull emblem ghosted across the chest. Subtle nearly black print. Attached image is brand graphic reference only, keep geometry of any G skull emblem consistent, omit tricolor. Deep charcoal textured concrete studio background with subtle directional light from upper left, matte tactile cotton, realistic folds and natural volume, sophisticated black-on-black tonal separation. Consistent catalog lighting, no model, no hanger, no props, no price or headings or watermarks."
+    },
+    {
+      "file": "public/assets/product-tactical.jpg",
+      "method": "OpenAI built-in image generation",
+      "prompt": "Use case: product-mockup. Asset: premium e-commerce product photograph for GHOSTER, vertical 4:5. One black heavyweight oversized short sleeve crew-neck cotton T-shirt on an invisible mannequin, centered and entire garment visible with generous margin, shoulders broad, sleeves relaxed. Front view, small compact grey GHOSTER wordmark on upper left chest and tiny military style grey bars near left sleeve hem. Attached image is brand graphic reference only, keep geometry of any G skull emblem consistent, omit tricolor. Deep charcoal textured concrete studio background with subtle directional light from upper left, matte tactile cotton, realistic folds and natural volume, sophisticated black-on-black tonal separation. Consistent catalog lighting, no model, no hanger, no props, no price or headings or watermarks."
+    },
+    {
+      "file": "public/assets/product-apex.jpg",
+      "method": "OpenAI built-in image generation",
+      "prompt": "Use case: product-mockup. Asset: premium e-commerce product photograph for GHOSTER, vertical 4:5. One black heavyweight oversized short sleeve crew-neck cotton T-shirt on an invisible mannequin, centered and entire garment visible with generous margin, shoulders broad, sleeves relaxed. Front view, vertical distressed GHOSTER text down the right side of the front, dark grey ink, graphic streetwear. Attached image is brand graphic reference only, keep geometry of any G skull emblem consistent, omit tricolor. Deep charcoal textured concrete studio background with subtle directional light from upper left, matte tactile cotton, realistic folds and natural volume, sophisticated black-on-black tonal separation. Consistent catalog lighting, no model, no hanger, no props, no price or headings or watermarks."
+    },
+    {
+      "file": "public/assets/product-strike.jpg",
+      "method": "OpenAI built-in image generation",
+      "prompt": "Use case: product-mockup. Asset: premium e-commerce product photograph for GHOSTER, vertical 4:5. One black heavyweight oversized short sleeve crew-neck cotton T-shirt on an invisible mannequin, centered and entire garment visible with generous margin, shoulders broad, sleeves relaxed. Front view, medium size grey distressed G skull emblem on center chest. Minimal rest of shirt. Attached image is brand graphic reference only, keep geometry of any G skull emblem consistent, omit tricolor. Deep charcoal textured concrete studio background with subtle directional light from upper left, matte tactile cotton, realistic folds and natural volume, sophisticated black-on-black tonal separation. Consistent catalog lighting, no model, no hanger, no props, no price or headings or watermarks."
+    },
+    {
+      "file": "public/assets/product-shadow-back.jpg",
+      "method": "OpenAI built-in image generation",
+      "prompt": "Use case: product-mockup. Portrait 4:5 catalog photograph of the BACK of one black oversized short sleeve cotton crewneck T-shirt on an invisible mannequin. Large distressed white G with skull lower half centered on the back, like the attached logo emblem, no colored stripes and no words. Entire garment visible centered with margins, dark charcoal concrete background, soft upper left studio light revealing premium matte cotton folds. No person, no hanger, no other objects, no watermark."
+    }
+  ]
+}

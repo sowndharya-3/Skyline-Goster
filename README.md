@@ -1,6 +1,6 @@
 # GHOSTER — React ecommerce UI
 
-A connected, black-and-white T-shirt storefront prototype inspired by the layout rhythm of https://www.snitch.com/. Built with React 19, TypeScript and Vite. This package is a standalone React frontend; it does not require Next.js, a database, an API key or a payment account to run.
+A connected dark streetwear storefront redesigned around the user-supplied GHOSTER reference: charcoal surfaces, olive accents, locally bundled condensed typography, cinematic campaign imagery and the Army / Gamer / Biker identity. Built with React 19, TypeScript and Vite. This package is a standalone React frontend; it does not require Next.js, a database, an API key or a payment account to run.
 
 ## Start locally
 
@@ -22,7 +22,7 @@ npm run build
 npm run preview
 ```
 
-`npm run build` checks TypeScript and produces `dist/`. A prebuilt `dist/` is already included. The bundled `package-lock.json` retains the resolved dependency versions used during development.
+`npm run build` checks TypeScript and produces `dist/`. The generated `dist/` folder is ignored by Git; rebuild it when preparing a deployment. The bundled `package-lock.json` retains the resolved dependency versions used during development.
 
 For ordinary static hosting, upload the **contents inside `dist/`** into the intended website or subdomain document root. Do not upload the entire source folder as the website. Confirm the target folder before replacing a previously hosted site.
 
@@ -31,11 +31,11 @@ The build uses relative asset paths and hash-based routes, so it works in a subf
 ## What's included
 
 - Original supplied GHOSTER logo PDF and wordmark. On each full page load, the G emblem assembles on its own, then the complete wordmark fades in before the site opens (about 3.2 seconds). The intro includes an Enter site button, keyboard support and a short static presentation for reduced-motion settings; route changes do not replay it.
-- Responsive home page, three image banners with autoplay, manual arrows, slide indicators, pause/play and clickable collection destinations.
+- Responsive reference-inspired homepage: manual campaign slides, mindset banner, Army/Gamer/Biker collection cards, five-product drop, identity band, packaging feature and community carousel.
 - T-shirts only: half sleeve, full sleeve, oversized and graphic collections. No fixed Men/Women categories.
 - Shop page with colour, size and price filters, sorting, collection links and empty states.
 - Header search with matching product suggestions and a results page.
-- Product detail, enlarged photo, size availability, size guide, quantity selector, wishlist, Add to bag and Buy now.
+- Product detail with thumbnail gallery and zoom, size availability, quantity, wishlist, Add to loadout confirmation, previous/next products, and keyboard-accessible Description / Details / Size guide / Shipping tabs.
 - Quick add with required size selection.
 - Persistent wishlist and shopping bag with separate size variants, quantities, removal and move-to-wishlist.
 - Coupon `GHOST10`: 10% off the item subtotal, rounded to the nearest rupee.
@@ -44,7 +44,7 @@ The build uses relative asset paths and hash-based routes, so it works in a subf
 - Demo payment options: UPI, cards, net banking and cash on delivery. Payment-failure preview preserves the bag.
 - Dedicated responsive login page at `#/login`, using the existing name/email demo sign-in with validation and guest access. Signed-out account visits redirect to login; signing in opens the account page, and signing out returns to login.
 - Demo account, profile editing, saved addresses, order history and order details.
-- About, shipping/returns, size guide, FAQs, preview privacy notice and not-found state.
+- Dedicated About, Packaging and The Unseen pages; local demo community signup; shipping/returns, size guide, FAQs, preview privacy notice and not-found state.
 - Accessible Radix-based dialogs, sheets and selectors; keyboard focus, form labels, reduced-motion handling and responsive layouts.
 
 ## Important scope
@@ -54,7 +54,8 @@ The build uses relative asset paths and hash-based routes, so it works in a subf
 - Payment success/failure is simulated. No Razorpay integration and no funds are collected.
 - Login is explicitly a demo name/email flow. No OTP, password, verification or secure authentication is implemented.
 - Cart, wishlist, profile, sample addresses and orders use `localStorage` under `ghoster-prototype-v1`. They are local to the browser and are not isolated by real user accounts. Use sample information.
-- Buy now adds the selected variant to the bag and takes the user directly to checkout; the existing bag remains included.
+- Add to loadout opens a confirmation with View loadout and Continue shopping. Checkout includes every item in the current bag.
+- Community signup saves a preference under `ghoster-community-preview` on this device only; no emails are sent or subscribed externally.
 - The PIN-code checker validates format and returns a labelled sample estimate. It does not query a courier service.
 - Order tracking displays the confirmed state only; later stages remain inactive until a live shipping integration exists.
 - Prices, offers, stock, material specifications, delivery estimates and size measurements are sample content, not approved commercial commitments.
@@ -65,20 +66,24 @@ The build uses relative asset paths and hash-based routes, so it works in a subf
 | File | Purpose |
 |---|---|
 | `src/main.tsx` | React entry point |
-| `src/App.tsx` | Shared header/footer, splash integration, navigation, home page and quick add |
+| `src/App.tsx` | Shared header/footer, splash integration, routing, quick add and loadout confirmation |
 | `src/SplashScreen.tsx` | G formation, wordmark reveal, skip action and accessible page handoff |
 | `src/splash.css` | Responsive splash animation and reduced-motion presentation |
 | `src/LoginPage.tsx` | Dedicated demo sign-in, form validation and account navigation |
 | `src/login.css` | Responsive login page styling |
-| `src/shop.tsx` | Shop, filters, wishlist, product page and size guide |
+| `src/BrandPages.tsx` | Homepage, About, Packaging, The Unseen, brand lockup and signup |
+| `src/ProductPage.tsx` | Product gallery, purchasing controls and information tabs |
+| `src/shop.tsx` | Shop, filters, wishlist and size guide |
 | `src/pages.tsx` | Bag, checkout, account, orders and information pages |
 | `src/catalog.ts` | Brand metadata, collections, products, banners and currency formatting |
 | `src/store.tsx` | React state, local persistence, cart totals and hash routing |
 | `src/ui.tsx` | Shared storefront controls and cards |
-| `src/styles.css` | Responsive black-and-white design |
+| `src/styles.css` | Existing responsive layout and transactional components |
+| `src/theme.css` | Charcoal/olive design system, page sections and responsive refinements |
 | `app/globals.css` | Tailwind and shared component theme tokens; CSS only, not a Next.js app |
 | `components/ui/` | Accessible reused UI primitives |
-| `public/assets/` | Bundled local images and logo |
+| `public/assets/` | Local logo, generated campaign/product concepts, legacy images and fonts |
+| `public/assets/campaign-sources.json` | Generated image filenames, exact prompts and generation method |
 | `reference/GHOSTER-original-logo.pdf` | Original supplied logo |
 | `ASSET-CREDITS.md` | Photo sourcing and replacement notes |
 | `QA-NOTES.md` | Checks performed and manual walkthrough |
@@ -94,4 +99,4 @@ The build uses relative asset paths and hash-based routes, so it works in a subf
 
 ## Reset the demo
 
-Open `#/info/privacy` and click **Clear prototype data**, or remove `ghoster-prototype-v1` from the browser's local storage.
+Open `#/info/privacy` and click **Clear prototype data**, or remove `ghoster-prototype-v1` and `ghoster-community-preview` from the browser's local storage.

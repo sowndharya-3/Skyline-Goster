@@ -19,24 +19,24 @@
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #101010;
-  --card: #ffffff;
-  --card-foreground: #171717;
-  --popover: #ffffff;
-  --popover-foreground: #171717;
-  --primary: #000000;
-  --primary-foreground: #fafafa;
-  --secondary: #f5f5f5;
-  --secondary-foreground: #171717;
-  --muted: #f5f5f5;
-  --muted-foreground: #737373;
-  --accent: #f5f5f5;
-  --accent-foreground: #171717;
+  --background: #080a08;
+  --foreground: #e8e8e2;
+  --card: #10130f;
+  --card-foreground: #e8e8e2;
+  --popover: #10130f;
+  --popover-foreground: #e8e8e2;
+  --primary: #b4a979;
+  --primary-foreground: #10130b;
+  --secondary: #1b2116;
+  --secondary-foreground: #e8e8e2;
+  --muted: #1b2116;
+  --muted-foreground: #a4a59b;
+  --accent: #303b25;
+  --accent-foreground: #e8e8e2;
   --destructive: #e7000b;
-  --border: #e5e5e5;
-  --input: #e5e5e5;
-  --ring: #a1a1a1;
+  --border: #32352e;
+  --input: #515647;
+  --ring: #b4a979;
   --chart-1: #f54900;
   --chart-2: #009689;
   --chart-3: #104e64;
@@ -89,7 +89,7 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-  --font-sans: Arial, Helvetica, sans-serif;
+  --font-sans: "Barlow Condensed", Arial, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     "Liberation Mono", "Courier New", monospace;
 }
@@ -98,5 +98,5 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Barlow Condensed", Arial, sans-serif;
 }

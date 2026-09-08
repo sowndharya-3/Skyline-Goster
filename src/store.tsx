@@ -15,13 +15,15 @@ export function calculate(cart: Line[], coupon='') {
 }
 function useStoreState(){
  const [data,setData]=useState<Data>(empty);const [ready,setReady]=useState(false);
+ const [added,setAdded]=useState<{product:Product;size:string}|null>(null);
+ const dismissAdded=()=>setAdded(null);
  useEffect(()=>{try{const saved=JSON.parse(localStorage.getItem(KEY)||'null');if(saved&&Array.isArray(saved.cart)&&Array.isArray(saved.orders)&&Array.isArray(saved.wishlist)&&Array.isArray(saved.addresses))setData({...empty,...saved,cart:saved.cart.filter((l:Line)=>products.some(p=>p.id===l.id&&p.sizes.includes(l.size))&&Number.isInteger(l.qty)&&l.qty>0&&l.qty<=10)});}catch{}setReady(true);},[]);
  useEffect(()=>{if(ready)try{localStorage.setItem(KEY,JSON.stringify(data));}catch{toast.error('Your browser could not save this session.');}},[data,ready]);
- const add=(p:Product,size:string,qty=1)=>{setData(d=>{const found=d.cart.find(l=>l.id===p.id&&l.size===size);return {...d,cart:found?d.cart.map(l=>l===found?{...l,qty:Math.min(10,l.qty+qty)}:l):[...d.cart,{id:p.id,size,qty}]};});toast.success('Added to your bag');};
+ const add=(p:Product,size:string,qty=1)=>{if(!p.sizes.includes(size))return;setData(d=>{const found=d.cart.find(l=>l.id===p.id&&l.size===size);return {...d,cart:found?d.cart.map(l=>l===found?{...l,qty:Math.min(10,l.qty+qty)}:l):[...d.cart,{id:p.id,size,qty:Math.max(1,Math.min(10,qty))}]};});setAdded({product:p,size});};
  const quantity=(id:string,size:string,qty:number)=>setData(d=>({...d,cart:d.cart.map(l=>l.id===id&&l.size===size?{...l,qty:Math.max(1,Math.min(10,qty))}:l)}));
  const remove=(id:string,size:string)=>setData(d=>({...d,cart:d.cart.filter(l=>l.id!==id||l.size!==size)}));
  const toggleWish=(id:string)=>setData(d=>({...d,wishlist:d.wishlist.includes(id)?d.wishlist.filter(x=>x!==id):[...d.wishlist,id]}));
- return {data,setData,ready,add,quantity,remove,toggleWish};
+ return {data,setData,ready,add,quantity,remove,toggleWish,added,dismissAdded};
 }
 const Context=createContext<ReturnType<typeof useStoreState>|null>(null);
 export function StoreProvider({children}:{children:React.ReactNode}){const state=useStoreState();return <Context.Provider value={state}>{children}</Context.Provider>;}

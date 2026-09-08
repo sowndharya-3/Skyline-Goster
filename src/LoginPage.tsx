@@ -43,12 +43,12 @@ export function LoginPage() {
       <a className="sign-in-back" href="#/shop"><ArrowLeft size={16} /> Back to the tees</a>
       <div className="sign-in-shell">
         <div className="sign-in-art">
-          <img className="sign-in-photo" src={asset('black-oversized')} alt="Black oversized tee" />
+          <img className="sign-in-photo" src={asset('campaign-hero')} alt="Black oversized tee" />
           <img className="sign-in-wordmark" src="./assets/wordmark.png" alt="GHOSTER" width="689" height="83" />
           <div className="sign-in-caption">
             <span className="eyebrow">BUILD FOR THE UNSEEN</span>
-            <p>YOUR STYLE.<br />YOUR SPACE.</p>
-            <span>Make room for your everyday favourites.</span>
+            <p>YOUR MINDSET.<br />YOUR IDENTITY.</p>
+            <span>For the ones who move in silence.</span>
           </div>
         </div>
         <div className="sign-in-content">

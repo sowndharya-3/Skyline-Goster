@@ -1,0 +1,76 @@
+[
+  {
+    "name": "black-oversized",
+    "path": "/workspace/scratch/df95689f4b63/tee-assets/black-oversized.png",
+    "url": "https://nyrio.in/cdn/shop/files/Oversized_black_tee.png?v=1781018271&width=1946",
+    "source": "https://nyrio.in/products/customized-oversized-t-shirt",
+    "type": "image/png",
+    "bytes": 1908701,
+    "reuse": "Third-party sample imagery only. No commercial reuse license verified; replace or obtain permission before production."
+  },
+  {
+    "name": "white-oversized",
+    "path": "/workspace/scratch/df95689f4b63/tee-assets/white-oversized.jpg",
+    "url": "https://store.unvrs.com/cdn/shop/files/Untitled-1_0000s_0005_250335_20250318__Intoptier_HiIbiza_Studio_Ibiza_Photos_UNVRS_Ecommerce_4000px_2.jpg?v=1748515988",
+    "source": "https://store.unvrs.com/products/premium-logo-tee-white",
+    "type": "image/jpeg",
+    "bytes": 210727,
+    "reuse": "Third-party sample imagery only. No commercial reuse license verified; replace or obtain permission before production."
+  },
+  {
+    "name": "white-graphic",
+    "path": "/workspace/scratch/df95689f4b63/tee-assets/white-graphic.jpg",
+    "url": "https://feature.com/cdn/shop/collections/neighborhood.jpg?v=1750461794",
+    "source": "https://feature.com/collections/neighborhood",
+    "type": "image/jpeg",
+    "bytes": 324775,
+    "reuse": "Third-party sample imagery only. No commercial reuse license verified; replace or obtain permission before production."
+  },
+  {
+    "name": "raglan-longsleeve",
+    "path": "/workspace/scratch/df95689f4b63/tee-assets/raglan-longsleeve.jpg",
+    "url": "https://surteez.com/cdn/shop/files/DSC01296.jpg?v=1701676778&width=3840",
+    "source": "https://surteez.com/products/charcoal-grey-raglan-1",
+    "type": "image/jpeg",
+    "bytes": 107138,
+    "reuse": "Third-party sample imagery only. No commercial reuse license verified; replace or obtain permission before production."
+  },
+  {
+    "name": "black-classic",
+    "error": "HTTP Error 403: Forbidden"
+  },
+  {
+    "name": "hero-concrete",
+    "path": "/workspace/scratch/df95689f4b63/tee-assets/hero-concrete.jpg",
+    "url": "https://alexkwa.com/wp-content/uploads/2019/05/IMG_8984-1.jpg",
+    "source": "https://alexkwa.com/uniqlo-supima-tshirt/",
+    "type": "image/jpeg",
+    "bytes": 599442,
+    "reuse": "Third-party sample imagery only. No commercial reuse license verified; replace or obtain permission before production."
+  },
+  {
+    "name": "black-longsleeve",
+    "path": "/workspace/scratch/df95689f4b63/tee-assets/black-longsleeve.jpg",
+    "url": "https://i.etsystatic.com/58517261/r/il/a2a85f/7408102519/il_800x800.7408102519_mz6e.jpg",
+    "source": "https://www.etsy.com/in-en/market/plain_bulk_t_shirts",
+    "type": "image/jpeg",
+    "bytes": 26582,
+    "reuse": "Third-party sample imagery only. No commercial reuse license verified; replace or obtain permission before production."
+  },
+  {
+    "name": "hero-white",
+    "path": "/workspace/scratch/df95689f4b63/tee-assets/hero-white.png",
+    "url": "https://petrolindustries.com/cdn/shop/files/12.png?v=1742903619&width=1500",
+    "source": "https://petrolindustries.com/fr-be/blogs/news/the-power-of-timeless-basics",
+    "type": "image/png",
+    "bytes": 1607332,
+    "reuse": "Third-party sample imagery only. No commercial reuse license verified; replace or obtain permission before production."
+  },
+  {
+    "name": "white-art-oversized",
+    "path": "/workspace/scratch/df95689f4b63/tee-assets/white-art-oversized.png",
+    "url": "https://lifeofstreetwear.com/cdn/shop/files/Ontwerpzondertitel_68_18521294-77d0-4104-9619-b377af36d008.png?v=1759839041&width=1080",
+    "source": "https://lifeofstreetwear.com/products/lifeofstreetwear-men-s-white-graphic-oversized-t-shirt",
+    "reuse": "Third-party sample imagery only. No commercial reuse license verified; replace or obtain permission before production."
+  }
+]

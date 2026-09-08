@@ -1,0 +1,240 @@
+.section.sign-in-page {
+  max-width: 1280px;
+  padding-top: 36px;
+  padding-bottom: 72px;
+}
+
+.sign-in-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 36px;
+  margin-bottom: 22px;
+  font-size: 13px;
+  color: #666;
+}
+
+.sign-in-shell {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid #e2e2e2;
+  background: #fff;
+}
+
+.sign-in-art {
+  position: relative;
+  min-height: 610px;
+  overflow: hidden;
+  isolation: isolate;
+  background: #0b0b0b;
+  color: #fff;
+}
+
+.sign-in-photo {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  filter: grayscale(1) brightness(.8);
+  z-index: -2;
+}
+
+.sign-in-art::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, #0005, transparent 35%, #000d);
+}
+
+.sign-in-wordmark {
+  position: absolute;
+  left: 36px;
+  top: 36px;
+  width: 175px;
+  height: auto;
+  mix-blend-mode: screen;
+}
+
+.sign-in-caption {
+  position: absolute;
+  left: 36px;
+  right: 30px;
+  bottom: 40px;
+}
+
+.sign-in-caption p {
+  margin: 16px 0 20px;
+  font-size: clamp(38px, 4vw, 56px);
+  line-height: 1;
+  letter-spacing: -2px;
+  font-weight: 800;
+}
+
+.sign-in-caption > span:last-child {
+  font-size: 13px;
+  color: #ddd;
+}
+
+.sign-in-content {
+  min-width: 0;
+  align-self: center;
+  padding: 48px clamp(24px, 4vw, 60px);
+}
+
+.sign-in-content > .eyebrow {
+  font-size: 10px;
+  letter-spacing: 1.8px;
+  color: #666;
+}
+
+.sign-in-content h1 {
+  margin-top: 14px;
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  line-height: 1.1;
+}
+
+.sign-in-intro {
+  margin-top: 12px;
+  font-size: 14px;
+  color: #666;
+}
+
+.sign-in-form {
+  display: grid;
+  gap: 22px;
+  margin-top: 32px;
+}
+
+.sign-in-field {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+
+.sign-in-field label {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.sign-in-field input {
+  min-height: 50px;
+  font-size: 16px;
+  padding: 12px 14px;
+  border: 1px solid #cfcfcf;
+}
+
+.sign-in-field input:focus-visible {
+  border-color: #111;
+  outline: 1px solid #111;
+  outline-offset: 0;
+}
+
+.sign-in-field input[aria-invalid=true] {
+  border-color: #a52a2a;
+}
+
+.sign-in-error {
+  color: #a52a2a;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.sign-in-demo {
+  margin: 0;
+  font-size: 12px;
+  color: #777;
+  line-height: 1.7;
+}
+
+.action.sign-in-submit {
+  width: 100%;
+  min-height: 52px;
+  justify-content: space-between;
+}
+
+.sign-in-guest {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  margin-top: 16px;
+  font-size: 13px;
+}
+
+.sign-in-guest:hover,
+.sign-in-back:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.sign-in-help {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid #e5e5e5;
+  font-size: 12px;
+  color: #777;
+  text-align: center;
+}
+
+.sign-in-help a {
+  color: #111;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 760px) {
+  .section.sign-in-page {
+    padding: 22px 20px 40px;
+  }
+
+  .sign-in-shell {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .sign-in-art {
+    min-height: 210px;
+  }
+
+  .sign-in-photo {
+    object-position: center 28%;
+  }
+
+  .sign-in-wordmark {
+    top: 22px;
+    left: 24px;
+    width: 130px;
+  }
+
+  .sign-in-caption {
+    left: 24px;
+    right: 24px;
+    bottom: 24px;
+  }
+
+  .sign-in-caption p {
+    margin: 12px 0 0;
+    font-size: 34px;
+  }
+
+  .sign-in-caption > span:last-child {
+    display: none;
+  }
+
+  .sign-in-caption > .eyebrow {
+    font-size: 9px;
+  }
+
+  .sign-in-content {
+    padding: 32px 24px;
+  }
+
+  .sign-in-content h1 {
+    font-size: clamp(26px, 7vw, 36px);
+    letter-spacing: -1px;
+  }
+}

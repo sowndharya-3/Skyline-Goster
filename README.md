@@ -30,7 +30,7 @@ The build uses relative asset paths and hash-based routes, so it works in a subf
 
 ## What's included
 
-- Original supplied GHOSTER logo PDF and wordmark. On each full page load, the G emblem assembles inside a drawn circle, then the GHOSTER lettering forms before the site opens (about 3.2 seconds). The intro includes an Enter site button, keyboard support and a short static presentation for reduced-motion settings; route changes do not replay it.
+- Original supplied GHOSTER logo PDF and wordmark. On each full page load, the G emblem assembles on its own, then the complete wordmark fades in before the site opens (about 3.2 seconds). The intro includes an Enter site button, keyboard support and a short static presentation for reduced-motion settings; route changes do not replay it.
 - Responsive home page, three image banners with autoplay, manual arrows, slide indicators, pause/play and clickable collection destinations.
 - T-shirts only: half sleeve, full sleeve, oversized and graphic collections. No fixed Men/Women categories.
 - Shop page with colour, size and price filters, sorting, collection links and empty states.
@@ -42,6 +42,7 @@ The build uses relative asset paths and hash-based routes, so it works in a subf
 - Preview shipping: ₹79 below ₹1,499 subtotal; free at or above ₹1,499. The shipping threshold uses the pre-discount subtotal.
 - Guest checkout: validated address → payment-method preview → review → local order confirmation.
 - Demo payment options: UPI, cards, net banking and cash on delivery. Payment-failure preview preserves the bag.
+- Dedicated responsive login page at `#/login`, using the existing name/email demo sign-in with validation and guest access. Signed-out account visits redirect to login; signing in opens the account page, and signing out returns to login.
 - Demo account, profile editing, saved addresses, order history and order details.
 - About, shipping/returns, size guide, FAQs, preview privacy notice and not-found state.
 - Accessible Radix-based dialogs, sheets and selectors; keyboard focus, form labels, reduced-motion handling and responsive layouts.
@@ -65,8 +66,10 @@ The build uses relative asset paths and hash-based routes, so it works in a subf
 |---|---|
 | `src/main.tsx` | React entry point |
 | `src/App.tsx` | Shared header/footer, splash integration, navigation, home page and quick add |
-| `src/SplashScreen.tsx` | Circular G and wordmark animation, skip action and accessible page handoff |
+| `src/SplashScreen.tsx` | G formation, wordmark reveal, skip action and accessible page handoff |
 | `src/splash.css` | Responsive splash animation and reduced-motion presentation |
+| `src/LoginPage.tsx` | Dedicated demo sign-in, form validation and account navigation |
+| `src/login.css` | Responsive login page styling |
 | `src/shop.tsx` | Shop, filters, wishlist, product page and size guide |
 | `src/pages.tsx` | Bag, checkout, account, orders and information pages |
 | `src/catalog.ts` | Brand metadata, collections, products, banners and currency formatting |

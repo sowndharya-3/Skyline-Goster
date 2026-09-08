@@ -29,35 +29,9 @@
   animation: brand-splash-badge-settle 850ms cubic-bezier(.22, 1, .36, 1) 900ms both;
 }
 
-.brand-splash-ring,
-.brand-splash-ring svg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.brand-splash-ring {
-  transform: rotate(-90deg);
-}
-
-.brand-splash-ring-track {
-  stroke: #262626;
-  stroke-width: 1;
-}
-
-.brand-splash-ring-line {
-  stroke: #fff;
-  stroke-width: 1.5;
-  stroke-linecap: round;
-  stroke-dasharray: 1;
-  stroke-dashoffset: 0;
-  animation: brand-splash-circle 1000ms cubic-bezier(.65, 0, .35, 1) both;
-}
-
 .brand-splash-emblem {
   position: absolute;
-  inset: 20% 17%;
+  inset: 10% 6%;
 }
 
 .brand-splash-piece {
@@ -96,23 +70,11 @@
 }
 
 .brand-splash-wordmark {
-  display: flex;
+  display: block;
   width: 100%;
+  height: auto;
   aspect-ratio: 689 / 83;
-}
-
-.brand-splash-letter {
-  display: block;
-  flex-shrink: 0;
-  transform-origin: center bottom;
-  animation: brand-splash-letter-form 650ms cubic-bezier(.22, 1, .36, 1) var(--letter-delay) both;
-}
-
-.brand-splash-letter svg {
-  display: block;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
+  animation: brand-splash-wordmark-reveal 450ms ease 1250ms both;
 }
 
 .brand-splash-tagline {
@@ -149,11 +111,6 @@
   outline-offset: 5px;
 }
 
-@keyframes brand-splash-circle {
-  from { stroke-dashoffset: 1; }
-  to { stroke-dashoffset: 0; }
-}
-
 @keyframes brand-splash-emblem-form {
   from { opacity: 0; transform: translate(var(--piece-x), var(--piece-y)) rotate(var(--piece-angle)) scale(.8); }
   to { opacity: 1; transform: translate(0, 0) rotate(0) scale(1); }
@@ -164,9 +121,9 @@
   to { transform: translateY(-12px) scale(.74); }
 }
 
-@keyframes brand-splash-letter-form {
-  from { opacity: 0; transform: translate(var(--letter-x), -30px) rotate(var(--letter-angle)) scale(.75); }
-  to { opacity: 1; transform: translate(0, 0) rotate(0) scale(1); }
+@keyframes brand-splash-wordmark-reveal {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 @keyframes brand-splash-tagline-in {

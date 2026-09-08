@@ -1,0 +1,191 @@
+.brand-splash {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #000;
+  color: #fff;
+  animation: brand-splash-exit 350ms ease 2850ms both;
+}
+
+.brand-splash-art {
+  --badge-size: min(240px, 55vw, 42svh);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: min(420px, 82vw);
+  padding-top: calc(var(--badge-size) * .84);
+}
+
+.brand-splash-badge {
+  position: absolute;
+  top: 0;
+  width: var(--badge-size);
+  aspect-ratio: 1;
+  transform-origin: center top;
+  animation: brand-splash-badge-settle 850ms cubic-bezier(.22, 1, .36, 1) 900ms both;
+}
+
+.brand-splash-ring,
+.brand-splash-ring svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.brand-splash-ring {
+  transform: rotate(-90deg);
+}
+
+.brand-splash-ring-track {
+  stroke: #262626;
+  stroke-width: 1;
+}
+
+.brand-splash-ring-line {
+  stroke: #fff;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+  animation: brand-splash-circle 1000ms cubic-bezier(.65, 0, .35, 1) both;
+}
+
+.brand-splash-emblem {
+  position: absolute;
+  inset: 20% 17%;
+}
+
+.brand-splash-piece {
+  position: absolute;
+  inset: 0;
+  animation: brand-splash-emblem-form 850ms cubic-bezier(.22, 1, .36, 1) both;
+}
+
+.brand-splash-piece svg {
+  width: 100%;
+  height: 100%;
+}
+
+.brand-splash-piece-0 {
+  --piece-x: -26px;
+  --piece-y: -18px;
+  --piece-angle: -35deg;
+  clip-path: polygon(0 0, 50% 0, 50% 52%, 0 100%);
+  animation-delay: 200ms;
+}
+
+.brand-splash-piece-1 {
+  --piece-x: 26px;
+  --piece-y: -18px;
+  --piece-angle: 35deg;
+  clip-path: polygon(49.5% 0, 100% 0, 100% 100%, 49.5% 52%);
+  animation-delay: 300ms;
+}
+
+.brand-splash-piece-2 {
+  --piece-x: 0px;
+  --piece-y: 26px;
+  --piece-angle: 15deg;
+  clip-path: polygon(50% 51%, 100% 99%, 100% 100%, 0 100%, 0 99%);
+  animation-delay: 400ms;
+}
+
+.brand-splash-wordmark {
+  display: flex;
+  width: 100%;
+  aspect-ratio: 689 / 83;
+}
+
+.brand-splash-letter {
+  display: block;
+  flex-shrink: 0;
+  transform-origin: center bottom;
+  animation: brand-splash-letter-form 650ms cubic-bezier(.22, 1, .36, 1) var(--letter-delay) both;
+}
+
+.brand-splash-letter svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.brand-splash-tagline {
+  margin-top: 22px;
+  font-size: clamp(9px, 2.3vw, 11px);
+  font-weight: 500;
+  letter-spacing: .36em;
+  text-indent: .36em;
+  text-align: center;
+  color: #b5b5b5;
+  animation: brand-splash-tagline-in 450ms ease 2050ms both;
+}
+
+.brand-splash-skip {
+  position: absolute;
+  right: max(24px, env(safe-area-inset-right));
+  bottom: max(24px, env(safe-area-inset-bottom));
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 44px;
+  padding: 10px 4px;
+  font-size: 12px;
+  letter-spacing: .08em;
+  color: #b5b5b5;
+}
+
+.brand-splash-skip:hover {
+  color: #fff;
+}
+
+.brand-splash-skip:focus-visible {
+  outline: 1px solid #fff;
+  outline-offset: 5px;
+}
+
+@keyframes brand-splash-circle {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes brand-splash-emblem-form {
+  from { opacity: 0; transform: translate(var(--piece-x), var(--piece-y)) rotate(var(--piece-angle)) scale(.8); }
+  to { opacity: 1; transform: translate(0, 0) rotate(0) scale(1); }
+}
+
+@keyframes brand-splash-badge-settle {
+  from { transform: translateY(32px) scale(1); }
+  to { transform: translateY(-12px) scale(.74); }
+}
+
+@keyframes brand-splash-letter-form {
+  from { opacity: 0; transform: translate(var(--letter-x), -30px) rotate(var(--letter-angle)) scale(.75); }
+  to { opacity: 1; transform: translate(0, 0) rotate(0) scale(1); }
+}
+
+@keyframes brand-splash-tagline-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes brand-splash-exit {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-splash,
+  .brand-splash * {
+    animation: none !important;
+  }
+
+  .brand-splash-badge {
+    transform: translateY(-12px) scale(.74);
+  }
+}

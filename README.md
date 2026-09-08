@@ -30,7 +30,7 @@ The build uses relative asset paths and hash-based routes, so it works in a subf
 
 ## What's included
 
-- Original supplied GHOSTER logo PDF, extracted wordmark and a 3-second branded splash on every full page load.
+- Original supplied GHOSTER logo PDF and wordmark. On each full page load, the G emblem assembles inside a drawn circle, then the GHOSTER lettering forms before the site opens (about 3.2 seconds). The intro includes an Enter site button, keyboard support and a short static presentation for reduced-motion settings; route changes do not replay it.
 - Responsive home page, three image banners with autoplay, manual arrows, slide indicators, pause/play and clickable collection destinations.
 - T-shirts only: half sleeve, full sleeve, oversized and graphic collections. No fixed Men/Women categories.
 - Shop page with colour, size and price filters, sorting, collection links and empty states.
@@ -64,7 +64,9 @@ The build uses relative asset paths and hash-based routes, so it works in a subf
 | File | Purpose |
 |---|---|
 | `src/main.tsx` | React entry point |
-| `src/App.tsx` | Shared header/footer, splash, navigation, home page and quick add |
+| `src/App.tsx` | Shared header/footer, splash integration, navigation, home page and quick add |
+| `src/SplashScreen.tsx` | Circular G and wordmark animation, skip action and accessible page handoff |
+| `src/splash.css` | Responsive splash animation and reduced-motion presentation |
 | `src/shop.tsx` | Shop, filters, wishlist, product page and size guide |
 | `src/pages.tsx` | Bag, checkout, account, orders and information pages |
 | `src/catalog.ts` | Brand metadata, collections, products, banners and currency formatting |

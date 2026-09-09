@@ -3,20 +3,22 @@ import { ArrowRight, Menu, Search, ShoppingBag, Heart, UserRound, Check } from '
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from '@/components/ui/sheet';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Toaster } from '@/components/ui/sonner';
-import { products, Product, asset, money } from './catalog';
+import { Product, asset, money } from './catalog';
 import { StoreProvider, useStore, useRoute, go } from './store';
 import { Action, IconButton, Choice } from './ui';
 import { ShopPage, ProductPage, WishlistPage } from './shop';
-import { BagPage, CheckoutPage, ConfirmationPage, OrdersPage, AccountPage, InfoPage, AdminPage } from './pages';
+import { BagPage, CheckoutPage, ConfirmationPage, OrdersPage, AccountPage, InfoPage } from './pages';
+import { AdminPage } from './AdminPage';
 import { SplashScreen } from './SplashScreen';
 import { LoginPage } from './LoginPage';
 import { BrandLogo, HomePage, AboutPage, PackagingPage, UnseenPage, Signup } from './BrandPages';
 import './styles.css';
 import './theme.css';
+import './admin.css';
 
 const navigation = [{ title: 'Shop', path: '/shop' }, { title: 'Drops', path: '/shop?collection=new' }, { title: 'The unseen', path: '/unseen' }, { title: 'About', path: '/info/about' }];
 function Header({ route }: { route: string }) {
-  const { data } = useStore();
+  const { data, products } = useStore();
   const [menu, setMenu] = useState(false);
   const [search, setSearch] = useState(false);
   const [query, setQuery] = useState('');
@@ -63,6 +65,7 @@ function Shell() {
   const [splash, setSplash] = useState(true);
   const [quick, setQuick] = useState<Product | null>(null);
   const path = route.split('?')[0];
+  const isAdmin = path === '/admin' || path.startsWith('/admin/');
   const dismissSplash = useCallback(() => setSplash(false), []);
   useEffect(() => { if (!splash) document.getElementById('content')?.focus({ preventScroll: true }); }, [splash]);
   useEffect(() => { setQuick(null); dismissAdded(); document.title = path === '/' ? 'GHOSTER | Build for the unseen' : `${path.split('/')[1].toUpperCase()} | GHOSTER`; }, [path]);
@@ -72,7 +75,7 @@ function Shell() {
   else if (path === '/info/about') page = <AboutPage />;
   else if (path === '/packaging') page = <PackagingPage />;
   else if (path === '/unseen') page = <UnseenPage />;
-  else if (path === '/admin') page = <AdminPage />;
+  else if (isAdmin) page = <AdminPage route={route} />;
   else if (path.startsWith('/product/')) page = <ProductPage key={path} id={path.split('/')[2]} onQuick={setQuick} />;
   else if (path === '/wishlist') page = <WishlistPage onQuick={setQuick} />;
   else if (path === '/bag') page = <BagPage />;
@@ -83,6 +86,6 @@ function Shell() {
   else if (path === '/account') page = <AccountPage />;
   else if (path.startsWith('/info/')) page = <InfoPage topic={path.split('/')[2]} />;
   else page = <div className="empty-state"><h1>Lost in the unseen?</h1><p>This page doesn't exist.</p><Action to="/">Back to home</Action></div>;
-  return <><div className="site-content" inert={splash}><a className="skip-link" href="#content" onClick={event => { event.preventDefault(); document.getElementById('content')?.focus(); }}>Skip to content</a><Header route={route} /><main id="content" tabIndex={-1}>{ready ? page : <div className="empty-state">Loading your loadout…</div>}</main><Footer /><QuickAdd product={quick} onClose={() => setQuick(null)} /><AddedDialog /><Toaster theme="dark" position="bottom-center" /></div>{splash && <SplashScreen onComplete={dismissSplash} />}</>;
+  return <><div className="site-content" inert={splash}><a className="skip-link" href="#content" onClick={event => { event.preventDefault(); document.getElementById('content')?.focus(); }}>Skip to content</a>{!isAdmin && <Header route={route} />}<main id="content" tabIndex={-1}>{ready ? page : <div className="empty-state">Loading your loadout…</div>}</main>{!isAdmin && <Footer />}<QuickAdd product={quick} onClose={() => setQuick(null)} /><AddedDialog /><Toaster theme="dark" position="bottom-center" /></div>{splash && <SplashScreen onComplete={dismissSplash} />}</>;
 }
 export default function App() { return <StoreProvider><Shell /></StoreProvider>; }

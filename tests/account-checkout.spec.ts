@@ -143,15 +143,16 @@ for (const payment of ['UPI', 'Cards', 'Net banking', 'Cash on delivery']) {
     await page.getByRole('button', { name: 'View details', exact: true }).click();
     await expect(page.locator('main h1')).toHaveText('ORDER DETAILS.');
     await open(page, '/admin');
-    await expect(page.locator('.admin-stats article').nth(0)).toContainText('₹1,499');
-    await expect(page.locator('.admin-stats article').nth(1)).toContainText('1 units sold');
-    await page.locator('.admin-order-list a').click();
-    await expect(page.locator('.order-card')).toContainText(orderId!);
+    await expect(page.locator('.ops-metrics article').nth(0)).toContainText('₹1,499');
+    await expect(page.locator('.ops-metrics article').nth(1)).toContainText('1 awaiting fulfilment');
+    await page.locator('.ops-recent-orders').getByRole('button', { name: orderId!, exact: true }).click();
+    await expect(page.getByRole('dialog')).toContainText(orderId!);
+    await page.getByRole('button', { name: 'Close details', exact: true }).click();
     await open(page, '/admin');
-    await page.getByRole('button', { name: 'View catalog', exact: true }).click();
-    await expect(page.locator('.product-card')).toHaveCount(12);
+    await page.getByRole('link', { name: 'Manage products', exact: true }).click();
+    await expect(page.locator('.ops-count-strip')).toContainText('12 Total products');
     await open(page, '/admin');
-    await page.getByRole('button', { name: 'View storefront', exact: true }).click();
+    await page.getByRole('link', { name: /^View storefront/ }).click();
     await expect(page.locator('.product-card')).toHaveCount(12);
   });
 }

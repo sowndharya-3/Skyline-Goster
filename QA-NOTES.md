@@ -1,5 +1,16 @@
 ﻿# Verification and review guide
 
+## Admin, framing and logo checks - 9 September 2026
+
+- `npm run test:e2e`: **66 passed**, covering 33 scenarios in desktop Chrome and mobile touch emulation. `npm run build` also passed, including TypeScript validation of the tests.
+- The storefront now reaches both viewport edges without the outer frame or decorative line beside the campaign selectors.
+- Header/footer/admin logos use small, clean SVG paths extracted from the supplied PDF. The G has no clipped text underneath. The splash uses the same vector emblem while preserving its three-piece animation. Logo bounds, white rendering, loaded assets and separation from header controls passed at 320, 390, 768 and 1440 pixels.
+- Admin includes overview metrics/activity, product creation/editing, size availability, archive/restore, catalogue search/filter/pagination, product/order CSV exports, order status management and customer records.
+- Product changes persist through reload and update storefront search, product detail, available sizes and bag totals. Removing sizes clears affected current bag lines. Past orders retain the original product details and prices after catalogue edits.
+- Admin order statuses persist through reload and appear in customer order history. Cancelled orders are excluded from order-value totals. Customer search and links to their orders passed.
+- Wide admin tables initially caused mobile viewport expansion and misplaced touch targets. Mobile tables now use labelled cards; the full mobile account/admin suite passed after that change.
+- Visually reviewed desktop overview, catalogue, editor, header and homepage, plus mobile catalogue cards, editor and header. The production bundle also passed a mobile admin edit-to-storefront check without runtime errors or failed asset requests.
+
 ## Automated interaction checks - 9 September 2026
 
 - `npm run test:e2e`: **54 passed** in Chrome, with 27 scenarios each at desktop (1440 × 1000) and mobile emulation (390 × 844). The route sweep also checks 320 and 768 pixels. Every scenario checks for uncaught page errors.
@@ -38,4 +49,4 @@ Run `npm run dev`, or run `npm run build` followed by `npm run preview` to inspe
 
 Authentication, signup, payment, orders and courier estimates are frontend demonstrations. Community signup is stored on this device only. Product and packaging imagery is generated concept artwork; the retained older products use the existing third-party sample photos. A live store still needs its approved inventory, specifications, policies and backend services.
 
-The dashboard displays local sample order/catalogue data. Its View catalog link opens the storefront; catalogue editing remains in `src/catalog.ts`.
+The dashboard manages local sample order/catalogue data. It does not provide secure staff access or a backend. Product artwork is selected from the bundled sample assets. Archiving and status changes affect this browser's demo data only; they do not trigger payment, refund or shipping actions.

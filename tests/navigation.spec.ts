@@ -1,5 +1,29 @@
 import { test, expect, open, home } from './helpers';
 
+test('vector logo stays complete, white and clear of header controls at every breakpoint', async ({ page }) => {
+  await open(page);
+  const widths = page.viewportSize()!.width < 760 ? [320, 390] : [768, 1440];
+  for (const width of widths) {
+    await page.setViewportSize({ width, height: 900 });
+    const mark = page.locator('header .brand-mark');
+    const word = page.locator('header .brand-wordmark');
+    await expect(mark).toHaveAttribute('src', './assets/brand-mark.svg');
+    await expect(word).toHaveAttribute('src', './assets/brand-wordmark.svg');
+    await expect(mark).toHaveCSS('filter', 'none');
+    await expect.poll(() => word.evaluate((el: HTMLImageElement) => el.complete && el.naturalWidth > 0)).toBe(true);
+    const boxes = await page.locator('header').evaluate(header => {
+      const mark = header.querySelector('.brand-mark')!.getBoundingClientRect();
+      const word = header.querySelector('.brand-wordmark')!.getBoundingClientRect();
+      const controls = header.querySelector('.header-actions')!.getBoundingClientRect();
+      return { markWidth: mark.width, gap: word.left - mark.right, right: word.right, controls: controls.left };
+    });
+    expect(boxes.markWidth).toBeLessThanOrEqual(48);
+    expect(boxes.gap).toBeGreaterThanOrEqual(0);
+    expect(boxes.gap).toBeLessThanOrEqual(16);
+    expect(boxes.right).toBeLessThan(boxes.controls);
+  }
+});
+
 test('splash dismisses naturally, supports skipping, and preserves keyboard access', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await page.goto('/');

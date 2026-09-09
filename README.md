@@ -44,6 +44,7 @@ The build uses relative asset paths and hash-based routes, so it works in a subf
 ## What's included
 
 - Original supplied GHOSTER logo PDF and wordmark. On each full page load, the G emblem assembles on its own, then the complete wordmark fades in before the site opens (about 3.2 seconds). The intro includes an Enter site button, keyboard support and a short static presentation for reduced-motion settings; route changes do not replay it.
+- Clean vector brand variants keep the header, footer and admin logo sharp without clipped text below the G. The storefront spans the viewport without an outer frame.
 - Responsive reference-inspired homepage: manual campaign slides, mindset banner, Army/Gamer/Biker collection cards, five-product drop, identity band, packaging feature and community carousel.
 - T-shirts only: half sleeve, full sleeve, oversized and graphic collections. No fixed Men/Women categories.
 - Shop page with colour, size and price filters, sorting, collection links and empty states.
@@ -57,6 +58,7 @@ The build uses relative asset paths and hash-based routes, so it works in a subf
 - Demo payment options: UPI, cards, net banking and cash on delivery. Payment-failure preview preserves the bag.
 - Dedicated responsive login page at `#/login`, using the existing name/email demo sign-in with validation and guest access. Signed-out account visits redirect to login; signing in opens the account page, and signing out returns to login.
 - Demo account, profile editing, saved addresses, order history and order details.
+- Dedicated responsive admin workspace at `#/admin`, with Overview, Products, Orders and Customers. Create/edit products, manage available sizes, archive/restore products, search/filter/paginate the catalogue, export products/orders as CSV, and update demo fulfilment statuses. Storefront search, product pages and bag totals use the edited catalogue; completed orders retain their purchased product details and prices.
 - Dedicated About, Packaging and The Unseen pages; local demo community signup; shipping/returns, size guide, FAQs, preview privacy notice and not-found state.
 - Accessible Radix-based dialogs, sheets and selectors; keyboard focus, form labels, reduced-motion handling and responsive layouts.
 
@@ -70,9 +72,9 @@ The build uses relative asset paths and hash-based routes, so it works in a subf
 - Add to loadout opens a confirmation with View loadout and Continue shopping. Checkout includes every item in the current bag.
 - Community signup saves a preference under `ghoster-community-preview` on this device only; no emails are sent or subscribed externally.
 - The PIN-code checker validates format and returns a labelled sample estimate. It does not query a courier service.
-- Order tracking displays the confirmed state only; later stages remain inactive until a live shipping integration exists.
+- Order tracking reflects statuses saved in admin, including cancellation. These are local demo updates; no courier, payment or refund action occurs.
 - Prices, offers, stock, material specifications, delivery estimates and size measurements are sample content, not approved commercial commitments.
-- Admin category management is not part of this customer UI deliverable. Collections and products are data-driven in `src/catalog.ts`, ready to be supplied by an API later.
+- The admin workspace uses local demo data and has no secure staff authentication or backend. Catalogue edits persist under `ghoster-catalog-v1` in the same browser. Product artwork is chosen from bundled sample assets; arbitrary image uploads and category creation are not included. Archiving a product or removing a size removes affected current bag lines; order history is retained.
 
 ## Main files
 
@@ -86,6 +88,9 @@ The build uses relative asset paths and hash-based routes, so it works in a subf
 | `src/login.css` | Responsive login page styling |
 | `src/BrandPages.tsx` | Homepage, About, Packaging, The Unseen, brand lockup and signup |
 | `src/ProductPage.tsx` | Product gallery, purchasing controls and information tabs |
+| `src/AdminPage.tsx` | Admin navigation, overview, catalogue, orders, customers and CSV exports |
+| `src/ProductEditor.tsx` | Validated product editing and creation |
+| `src/admin.css` | Responsive admin workspace, tables and editors |
 | `src/shop.tsx` | Shop, filters, wishlist and size guide |
 | `src/pages.tsx` | Bag, checkout, account, orders and information pages |
 | `src/catalog.ts` | Brand metadata, collections, products, banners and currency formatting |
@@ -112,4 +117,4 @@ The build uses relative asset paths and hash-based routes, so it works in a subf
 
 ## Reset the demo
 
-Open `#/info/privacy` and click **Clear prototype data**, or remove `ghoster-prototype-v1` and `ghoster-community-preview` from the browser's local storage.
+Open `#/info/privacy` and click **Clear prototype data**, or remove `ghoster-prototype-v1`, `ghoster-community-preview` and `ghoster-catalog-v1` from the browser's local storage. This also restores the bundled catalogue.

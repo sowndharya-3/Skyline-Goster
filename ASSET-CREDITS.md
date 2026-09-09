@@ -10,6 +10,10 @@ The user supplied a dark GHOSTER desktop/product/mobile/About composition on 8 S
 
 Exact prompts, methods and final filenames are recorded in `public/assets/campaign-sources.json`. The original logo was supplied as a brand reference for the hero, packaging and product generations. The six campaign files are `campaign-hero`, `campaign-army`, `campaign-gamer`, `campaign-biker`, `campaign-about` and `campaign-packaging`; the six product files are `product-shadow`, `product-shadow-back`, `product-eclipse`, `product-tactical`, `product-apex` and `product-strike` (all `.jpg`).
 
+## Vector brand variants
+
+`brand-mark.svg` and `brand-wordmark.svg` use the original vector paths from `reference/GHOSTER-original-logo.pdf`. The print distress masks are omitted in these small-display variants for clarity, and the emblem is monochrome for the site theme. Their view boxes contain only the intended mark/wordmark, so text from elsewhere on the PDF cannot appear underneath the G. The header, footer, admin brand and splash use these scalable assets; the large campaign wordmark retains its distressed treatment.
+
 ## Typography
 
 Barlow Condensed Regular and SemiBold are bundled locally under `public/assets/fonts/`, sourced from the Google Fonts repository (`google/fonts/ofl/barlowcondensed`). Their SIL Open Font License is included as `OFL-BarlowCondensed.txt`. No external font requests are needed at runtime.

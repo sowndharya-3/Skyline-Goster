@@ -1,14 +1,14 @@
 ﻿import { useState } from 'react';
 import { ArrowRight, ChevronLeft, ChevronRight, Heart, Ruler, Maximize2, Shirt, Layers, Fingerprint, BadgeCheck, Truck } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
-import { products, sizes, Product, asset, money } from './catalog';
+import { sizes, Product, asset, money } from './catalog';
 import { useStore } from './store';
 import { Action, IconButton, ProductCard, Quantity, EmptyState } from './ui';
 import { SizeGuide } from './shop';
 
 const tabs = ['Description', 'Details', 'Size guide', 'Shipping'];
 export function ProductPage({ id, onQuick }: { id: string; onQuick: (p: Product) => void }) {
-  const { data, add, toggleWish } = useStore();
+  const { data, products, add, toggleWish } = useStore();
   const product = products.find(p => p.id === id);
   const [size, setSize] = useState('');
   const [qty, setQty] = useState(1);

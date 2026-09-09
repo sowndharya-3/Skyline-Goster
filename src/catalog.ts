@@ -6,7 +6,7 @@ export const collections = [
   { id: 'oversized', name: 'Oversized', image: 'black-oversized', note: 'ROOM TO BE YOURSELF' },
   { id: 'graphic', name: 'Graphic tees', image: 'white-art-oversized', note: 'LET YOUR TEE TALK' },
 ];
-export type Product = { id: string; name: string; price: number; mrp: number; color: string; image: string; sleeve: string; fit: string; graphic: boolean; isNew: boolean; sizes: string[]; description: string; classification?: string; worlds?: string[]; gallery?: string[] };
+export type Product = { id: string; name: string; price: number; mrp: number; color: string; image: string; sleeve: string; fit: string; graphic: boolean; isNew: boolean; sizes: string[]; description: string; classification?: string; worlds?: string[]; gallery?: string[]; archived?: boolean };
 export const products: Product[] = [
   { id:'shadow-oversized', name:'Shadow', price:1499, mrp:1499, color:'Black', image:'product-shadow', sleeve:'Half sleeve', fit:'Oversized', graphic:false, isNew:true, sizes, classification:'Stealth', worlds:['army','gamer','biker'], gallery:['product-shadow','product-shadow-back','campaign-hero'], description:'Minimal on the front. Maximum in attitude. The Shadow tee is built for those who move in silence but still make an impact.' },
   { id:'eclipse', name:'Eclipse', price:1499, mrp:1499, color:'Black', image:'product-eclipse', sleeve:'Half sleeve', fit:'Oversized', graphic:true, isNew:true, sizes, classification:'Night', worlds:['gamer','biker'], description:'Dark on dark. A tonal emblem that reveals itself in the light. For the ones who find their focus after hours.' },

@@ -1,10 +1,11 @@
 ﻿import { useId, useState } from 'react';
 import { ArrowDown, ArrowRight, ChevronLeft, ChevronRight, ChevronsUp, Gamepad2, Wrench, Package, Tag, Shirt, Check } from 'lucide-react';
-import { Product, products, asset } from './catalog';
+import { useStore } from './store';
+import { Product, asset } from './catalog';
 import { Action, IconButton, ProductCard } from './ui';
 
 export function BrandLogo({ stacked = false }: { stacked?: boolean }) {
-  return <span className={'brand-lockup' + (stacked ? ' stacked' : '')}><svg viewBox="284 385 817 709" className="brand-mark" aria-hidden="true"><image href="./assets/logo.png" width="1570" height="1800" /></svg><img className="brand-wordmark" src="./assets/wordmark.png" alt="GHOSTER" width="689" height="83" /></span>;
+  return <span className={'brand-lockup' + (stacked ? ' stacked' : '')}><img className="brand-mark" src="./assets/brand-mark.svg" alt="" width="199" height="173" /><img className="brand-wordmark" src="./assets/brand-wordmark.svg" alt="GHOSTER" width="336" height="39" /></span>;
 }
 const worlds = [
   { name: 'Army', value: 'Discipline', image: 'campaign-army', note: 'Hold your ground. Stay the course.', icon: ChevronsUp },
@@ -40,6 +41,7 @@ function CommunityStrip() {
   return <section className="community-strip"><div className="community-copy"><h2>The unseen</h2><p>Real people. Same mindset.</p><Action secondary to="/unseen">Join the community <ArrowRight size={17} /></Action></div><div className="community-gallery" aria-roledescription="carousel" aria-label="The unseen lookbook"><div className="community-images">{Array.from({ length: 4 }, (_, i) => pictures[(slide + i) % pictures.length]).map(picture => <a key={picture.image} href="#/unseen"><img src={asset(picture.image)} alt={picture.alt} loading="lazy" /></a>)}</div><div className="community-controls"><IconButton label="Previous community photos" onClick={() => setSlide((slide + pictures.length - 1) % pictures.length)}><ChevronLeft size={16} /></IconButton><div className="carousel-dots">{pictures.map((p, i) => <button key={p.image} aria-label={'Community photo group ' + (i + 1)} aria-pressed={slide === i} className={slide === i ? 'active' : ''} onClick={() => setSlide(i)} />)}</div><IconButton label="Next community photos" onClick={() => setSlide((slide + 1) % pictures.length)}><ChevronRight size={16} /></IconButton></div></div></section>;
 }
 export function HomePage({ onQuick }: { onQuick: (p: Product) => void }) {
+  const { products } = useStore();
   const [slide, setSlide] = useState(0);
   const slides = [
     { image: 'campaign-hero', alt: 'Black oversized tee with the distressed GHOSTER emblem', tagline: 'BUILD FOR THE UNSEEN', to: '/shop?collection=new' },
@@ -56,7 +58,7 @@ export function HomePage({ onQuick }: { onQuick: (p: Product) => void }) {
       <a className="hero-scroll" href="#mindset" onClick={event => { event.preventDefault(); document.getElementById('mindset')?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' }); }}>Scroll<br />for more <ArrowDown size={17} /></a><span className="hero-footnote">Wear<br />the<br />mindset.</span>
     </section>
     <section className="mindset-section" id="mindset"><div className="mindset-banner"><img src={asset('campaign-army')} alt="Mountains stretching beyond a lone explorer" loading="lazy" /><div><h2>Not everyone<br />needs to see you.</h2><p>Built for those who move with discipline,<br />think with strength, and stay loyal.</p></div></div><WorldCards /></section>
-    <section className="drop-section"><div className="drop-heading"><h2>Shop the drop</h2><Action secondary to="/shop?collection=new">View all <ArrowRight size={17} /></Action></div><div className="product-grid drop-grid">{products.slice(0, 5).map(p => <ProductCard key={p.id} product={p} onQuick={onQuick} />)}</div></section>
+    <section className="drop-section"><div className="drop-heading"><h2>Shop the drop</h2><Action secondary to="/shop?collection=new">View all <ArrowRight size={17} /></Action></div><div className="product-grid drop-grid">{products.filter(p => p.isNew).slice(0, 5).map(p => <ProductCard key={p.id} product={p} onQuick={onQuick} />)}</div></section>
     <IdentityBand />
     <section className="packaging-banner"><img src={asset('campaign-packaging')} alt="Black GHOSTER box, folded tee, hang tags and thank-you card" loading="lazy" /><div><h2>You don’t just<br />receive a tee.<br /><span>You receive<br />the loadout.</span></h2><Action secondary to="/packaging">Our packaging <ArrowRight size={18} /></Action></div></section>
     <CommunityStrip />

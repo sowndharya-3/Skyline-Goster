@@ -35,6 +35,7 @@ main:focus{outline:none}
 .brand-lockup{display:flex;align-items:center;gap:12px;width:max-content}
 .brand-mark{width:38px;height:38px;object-fit:contain;flex-shrink:0}
 .brand .brand-wordmark,.brand-wordmark{width:144px;height:auto;object-fit:contain;flex-shrink:0;filter:none}
+.brand-full-logo{display:block;width:185px;height:auto;object-fit:contain;filter:none}
 .main-nav{display:flex;align-items:center;gap:36px;height:100%;font-size:13px;letter-spacing:1.3px;text-transform:uppercase}
 .main-nav a{height:100%;display:flex;align-items:center;border-bottom:2px solid transparent;padding-top:2px}
 .main-nav a.active{color:var(--olive);border-bottom-color:var(--olive)}
@@ -125,9 +126,7 @@ main:focus{outline:none}
 .footer-main{grid-template-columns:1.35fr .8fr .9fr .8fr 1.35fr;gap:32px;padding:48px 5% 40px}
 .footer-main>.footer-brand{display:flex;flex-direction:column;align-items:center;align-self:start;justify-self:start;gap:10px}
 .brand-lockup.stacked{flex-direction:column;gap:12px}
-.stacked .brand-mark{width:62px;height:62px}
-.footer-brand .stacked .brand-wordmark{width:185px;filter:none}
-.footer-brand>span:last-child{font-size:10px;letter-spacing:1.1px}
+.footer-brand .brand-full-logo{width:185px}
 .footer-main h3{font-size:15px;letter-spacing:1.8px;margin:8px 0 17px}
 .footer-main>div>a{color:var(--quiet);font-size:14px;line-height:1.7;margin-bottom:5px}
 .footer-signup>p{font-size:14px;color:var(--quiet);margin:-6px 0 12px}
@@ -367,7 +366,7 @@ input::placeholder{color:#898c80;opacity:1}
 .footer-main{gap:25px;grid-template-columns:1.2fr .8fr 1fr 1fr}
 .footer-signup{grid-column:2/-1;max-width:500px}
 .footer-main>.footer-brand{grid-row:1/3;align-self:center}
-.footer-brand .stacked .brand-wordmark{width:160px}
+.footer-brand .brand-full-logo{width:160px}
 .product-detail{gap:25px;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr)}
 .product-gallery{grid-template-columns:52px minmax(0,1fr);gap:10px}
 .product-title-row h1{font-size:42px}
@@ -462,8 +461,7 @@ input::placeholder{color:#898c80;opacity:1}
 .community-controls{margin-top:8px}
 .footer-main{grid-template-columns:repeat(3,minmax(0,1fr));gap:27px 15px;padding:35px 22px}
 .footer-main>.footer-brand{grid-column:1/-1;grid-row:auto;justify-self:center;margin-bottom:8px}
-.footer-brand .stacked .brand-wordmark{width:163px}
-.stacked .brand-mark{width:54px;height:54px}
+.footer-brand .brand-full-logo{width:163px}
 .footer-main h3{font-size:13px;margin:3px 0 14px}
 .footer-main>div>a{font-size:12px}
 .footer-signup{grid-column:1/-1;max-width:none}

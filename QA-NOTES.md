@@ -4,7 +4,7 @@
 
 - `npm run test:e2e`: **66 passed**, covering 33 scenarios in desktop Chrome and mobile touch emulation. `npm run build` also passed, including TypeScript validation of the tests.
 - The storefront now reaches both viewport edges without the outer frame or decorative line beside the campaign selectors.
-- Header/footer/admin logos use small, clean SVG paths extracted from the supplied PDF. The G has no clipped text underneath. The splash uses the same vector emblem while preserving its three-piece animation. Logo bounds, white rendering, loaded assets and separation from header controls passed at 320, 390, 768 and 1440 pixels.
+- Splash/header/campaign/login/admin/footer logos now use exact SVG artwork extracted from the supplied PDF. The original distress masks, tricolour accents and proportions are preserved; the footer uses the complete stacked lockup. Logo bounds, loaded assets and separation from header controls passed at 320, 390, 768 and 1440 pixels.
 - Admin includes overview metrics/activity, product creation/editing, size availability, archive/restore, catalogue search/filter/pagination, product/order CSV exports, order status management and customer records.
 - Product changes persist through reload and update storefront search, product detail, available sizes and bag totals. Removing sizes clears affected current bag lines. Past orders retain the original product details and prices after catalogue edits.
 - Admin order statuses persist through reload and appear in customer order history. Cancelled orders are excluded from order-value totals. Customer search and links to their orders passed.

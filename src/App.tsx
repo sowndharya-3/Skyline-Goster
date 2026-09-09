@@ -42,7 +42,7 @@ function Header({ route }: { route: string }) {
 }
 function Footer() {
   return <footer className="footer"><div className="footer-main">
-    <a className="footer-brand" href="#/" aria-label="GHOSTER home"><BrandLogo stacked /><span>— BUILD FOR THE UNSEEN —</span></a>
+    <a className="footer-brand" href="#/" aria-label="GHOSTER home"><BrandLogo stacked /></a>
     <div><h3>Shop</h3><a href="#/shop">All products</a><a href="#/shop?collection=new">New drop</a><a href="#/shop?collection=oversized">Oversized fits</a><a href="#/wishlist">Your wishlist</a></div>
     <div><h3>Support</h3><a href="#/info/size">Size guide</a><a href="#/info/shipping">Shipping & returns</a><a href="#/orders">Track your order</a><a href="#/info/help">Help & FAQs</a></div>
     <div><h3>Company</h3><a href="#/info/about">Our story</a><a href="#/unseen">The unseen</a><a href="#/packaging">Our packaging</a><a href="#/info/privacy">Privacy</a></div>

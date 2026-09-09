@@ -44,7 +44,7 @@ export function LoginPage() {
       <div className="sign-in-shell">
         <div className="sign-in-art">
           <img className="sign-in-photo" src={asset('campaign-hero')} alt="Black oversized tee" />
-          <img className="sign-in-wordmark" src="./assets/wordmark.png" alt="GHOSTER" width="689" height="83" />
+          <img className="sign-in-wordmark" src="./assets/brand-wordmark.svg" alt="GHOSTER" width="336" height="39" />
           <div className="sign-in-caption">
             <span className="eyebrow">BUILD FOR THE UNSEEN</span>
             <p>YOUR MINDSET.<br />YOUR IDENTITY.</p>

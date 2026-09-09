@@ -2,7 +2,7 @@
 
 ## Logo
 
-`reference/GHOSTER-original-logo.pdf` is the logo supplied by the user. The splash uses its original artwork, including the small tricolour accent. The header and footer use the original white wordmark and a monochrome cropped emblem on the new dark background.
+`reference/GHOSTER-original-logo.pdf` is the logo supplied by the user. The site uses browser-ready SVGs extracted directly from this file, including its distressed cuts and tricolour emblem accents.
 
 ## Current redesign reference
 
@@ -12,7 +12,7 @@ Exact prompts, methods and final filenames are recorded in `public/assets/campai
 
 ## Vector brand variants
 
-`brand-mark.svg` and `brand-wordmark.svg` use the original vector paths from `reference/GHOSTER-original-logo.pdf`. The print distress masks are omitted in these small-display variants for clarity, and the emblem is monochrome for the site theme. Their view boxes contain only the intended mark/wordmark, so text from elsewhere on the PDF cannot appear underneath the G. The header, footer, admin brand and splash use these scalable assets; the large campaign wordmark retains its distressed treatment.
+`brand-mark.svg`, `brand-wordmark.svg` and `brand-logo.svg` preserve the original vector paths, distress masks, colours and proportions from `reference/GHOSTER-original-logo.pdf`. Their view boxes crop only the requested emblem, wordmark or complete stacked lockup, so no artwork is clipped and no text from elsewhere on the PDF can appear underneath the G. The header, footer, admin, splash, campaign hero and login page all use these official vector assets.
 
 ## Typography
 

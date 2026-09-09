@@ -1,7 +1,19 @@
 import { test, expect, open, home } from './helpers';
 
-test('vector logo stays complete, white and clear of header controls at every breakpoint', async ({ page }) => {
+test('official vector logo stays complete and clear of header controls at every breakpoint', async ({ page }) => {
   await open(page);
+  const [markSource, wordmarkSource, fullSource] = await Promise.all([
+    page.request.get('/assets/brand-mark.svg').then(response => response.text()),
+    page.request.get('/assets/brand-wordmark.svg').then(response => response.text()),
+    page.request.get('/assets/brand-logo.svg').then(response => response.text()),
+  ]);
+  expect(markSource).toContain('mask_8');
+  expect(markSource).toContain('#f26723');
+  expect(markSource).toContain('#149a48');
+  expect(wordmarkSource).toContain('mask_3');
+  expect(fullSource).toContain('data-text="B"');
+  await expect(page.locator('footer .brand-full-logo')).toHaveAttribute('src', './assets/brand-logo.svg');
+  await expect(page.locator('.campaign-hero-copy img')).toHaveAttribute('src', './assets/brand-wordmark.svg');
   const widths = page.viewportSize()!.width < 760 ? [320, 390] : [768, 1440];
   for (const width of widths) {
     await page.setViewportSize({ width, height: 900 });

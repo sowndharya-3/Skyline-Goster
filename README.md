@@ -44,7 +44,7 @@ The build uses relative asset paths and hash-based routes, so it works in a subf
 ## What's included
 
 - Original supplied GHOSTER logo PDF and wordmark. On each full page load, the G emblem assembles on its own, then the complete wordmark fades in before the site opens (about 3.2 seconds). The intro includes an Enter site button, keyboard support and a short static presentation for reduced-motion settings; route changes do not replay it.
-- Clean vector brand variants keep the header, footer and admin logo sharp without clipped text below the G. The storefront spans the viewport without an outer frame.
+- Official vector brand assets preserve the supplied PDF's distressed cuts, tricolour accents and proportions across the splash, header, campaign hero, login, admin and footer. Each placement stays sharp and fully visible at desktop and phone sizes.
 - Responsive reference-inspired homepage: manual campaign slides, mindset banner, Army/Gamer/Biker collection cards, five-product drop, identity band, packaging feature and community carousel.
 - T-shirts only: half sleeve, full sleeve, oversized and graphic collections. No fixed Men/Women categories.
 - Shop page with colour, size and price filters, sorting, collection links and empty states.

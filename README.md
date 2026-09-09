@@ -15,6 +15,19 @@ npm run dev
 
 Open the local URL printed by Vite. To stop, press Ctrl+C.
 
+## Browser tests
+
+Install Google Chrome, then run:
+
+```sh
+npm run test:e2e
+npm run test:e2e:report
+```
+
+The suite starts its own server at `http://127.0.0.1:5190`, uses isolated browser sessions with sample details, and checks desktop and mobile layouts. It covers navigation, search, filtering, products, bag totals, demo login, saved addresses, all four demo payment methods and persisted orders. Failed checks include screenshots and traces in `test-results/`; the HTML report is in `playwright-report/`. Both directories are ignored by Git.
+
+Chrome is the default browser channel. To use installed Microsoft Edge in PowerShell, run `$env:PLAYWRIGHT_CHANNEL='msedge'` before the test command. The mobile project emulates a phone viewport and touch input in the selected desktop browser; it is not a real iOS/Android device test.
+
 ## Production build
 
 ```sh

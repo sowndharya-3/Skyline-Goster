@@ -1,5 +1,18 @@
 ﻿# Verification and review guide
 
+## Automated interaction checks - 9 September 2026
+
+- `npm run test:e2e`: **54 passed** in Chrome, with 27 scenarios each at desktop (1440 × 1000) and mobile emulation (390 × 844). The route sweep also checks 320 and 768 pixels. Every scenario checks for uncaught page errors.
+- Navigation coverage: natural/skipped G splash, keyboard handoff, all campaign slides, world cards, community arrows/dots, header and footer destinations, mobile menu, browser Back/Forward, FAQ accordions, signup validation and unknown-page recovery.
+- Shopping coverage: search suggestions/results/empty queries, dialog alignment and focus restoration, all collection and sort options, combined colour/size/price filters, clear/reset/empty results, all 12 product destinations and their gallery controls, zoom, size guide, tabs and keyboard navigation, delivery PIN validation, wishlist and quick add.
+- Transaction coverage: separate bag sizes, quantity boundaries, removal, move to wishlist, reload persistence, invalid/valid/removed coupons, shipping thresholds, demo sign-in/sign-out, profile editing, saved address validation/use/removal, checkout edits, payment-failure recovery, all four payment methods, persisted order details, dashboard updates and privacy reset.
+- Corrected four issues found by the checks: dialogs now restore keyboard focus; additions over the 10-unit size limit report the limit without a false confirmation; profile/address fields reject whitespace-only values; changing payment method clears the previous failure message.
+- Extended the quantity-limit case to cover quick add, retaining the size chooser after rejection and allowing a different size. The two affected desktop/mobile tests passed again after this extension.
+- Visually reviewed the desktop shop and search dialog plus the mobile filter drawer. The search controls remain inside their field and the filter sizes form an evenly aligned row.
+- `npm run build` validates the app, test sources and Playwright configuration before producing the production bundle.
+
+Run `npm run test:e2e` to reproduce the suite, and `npm run test:e2e:report` to open the latest HTML report. Tests start an isolated server on port 5190 and use sample browser data. Chrome must be installed; `PLAYWRIGHT_CHANNEL=msedge` selects installed Edge. Mobile checks use browser emulation, not physical devices. The runtime results cover the local frontend; live authentication, payments and shipping are outside this prototype.
+
 ## Redesign checks completed - 8 September 2026
 
 - `npm run build` passed TypeScript checking and the production Vite build.

@@ -60,7 +60,6 @@ export function HomePage({ onQuick }: { onQuick: (p: Product) => void }) {
     </section>
     <section className="mindset-section" id="mindset"><div className="mindset-banner"><img src={asset('campaign-army')} alt="Mountains stretching beyond a lone explorer" loading="lazy" /><div><h2>Not everyone<br />needs to see you.</h2><p>Built for those who move with discipline,<br />think with strength, and stay loyal.</p></div></div><WorldCards /></section>
     <section className="drop-section"><div className="drop-heading"><h2>Shop the drop</h2><Action secondary to="/shop?collection=new">View all <ArrowRight size={17} /></Action></div><div className="product-grid drop-grid">{products.filter(p => p.isNew).slice(0, 5).map(p => <ProductCard key={p.id} product={p} onQuick={onQuick} />)}</div></section>
-    <IdentityBand />
     <section className="packaging-banner"><img src={asset('campaign-packaging')} alt="Black GHOSTER box, folded tee, hang tags and thank-you card" loading="lazy" /><div><h2>You don’t just<br />receive a tee.<br /><span>You receive<br />the loadout.</span></h2><Action secondary to="/packaging">Our packaging <ArrowRight size={18} /></Action></div></section>
     <CommunityStrip />
   </div>;

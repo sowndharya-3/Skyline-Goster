@@ -53,7 +53,6 @@ export function HomePage({ onQuick }: { onQuick: (p: Product) => void }) {
   return <div className="home-page">
     <section className="campaign-hero" aria-roledescription="carousel" aria-label="GHOSTER campaign">
       <img className="campaign-hero-image" src={asset(active.image)} alt={active.alt} fetchPriority="high" />
-      <div className="hero-mindset">Army mindset<br />Gamer spirit<br />Biker soul</div>
       <div className="campaign-hero-copy"><h1><img src="./assets/brand-wordmark.svg" alt="GHOSTER" width="336" height="39" /></h1><p aria-live="polite">{active.tagline}</p><Action secondary to={active.to}>Explore the drop <ArrowRight size={22} /></Action></div>
       <div className="campaign-pagination">{slides.map((_, i) => <button key={i} aria-label={'Campaign slide ' + (i + 1)} aria-pressed={slide === i} className={slide === i ? 'active' : ''} onClick={() => setSlide(i)}>0{i + 1}</button>)}</div>
       <a className="hero-scroll" href="#mindset" onClick={event => { event.preventDefault(); document.getElementById('mindset')?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' }); }}>Scroll<br />for more <ArrowDown size={17} /></a><span className="hero-footnote">Wear<br />the<br />mindset.</span>

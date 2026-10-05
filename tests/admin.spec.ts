@@ -1,5 +1,22 @@
 import { readFile } from 'node:fs/promises';
-import { test, expect, open, addProduct, bag, fillAddress } from './helpers';
+import { test, expect, open, addProduct, bag, fillAddress, seedAdmin, adminSignIn, ADMIN_EMAIL, uniqueEmail } from './helpers';
+
+test.beforeEach(async ({ page }) => { await seedAdmin(page); });
+
+test('admin workspace is gated behind sign-in and rejects the wrong password', async ({ page }) => {
+  await page.addInitScript(() => sessionStorage.removeItem('ghoster-admin-token-v1'));
+  await open(page, '/admin');
+  await expect(page.locator('main h1')).toHaveText('Workspace sign-in.');
+  await page.getByLabel('Email', { exact: true }).fill(ADMIN_EMAIL);
+  await page.getByLabel('Password', { exact: true }).fill('wrong-password');
+  await page.getByRole('button', { name: 'Sign in', exact: true }).click();
+  await expect(page.getByRole('alert')).toHaveText('Incorrect email or password.');
+  await expect(page.locator('main h1')).toHaveText('Workspace sign-in.');
+  await adminSignIn(page);
+  if (page.viewportSize()!.width < 981) await page.getByRole('button', { name: 'Open admin menu' }).click();
+  await page.getByRole('button', { name: 'Sign out', exact: true }).click();
+  await expect(page.locator('main h1')).toHaveText('Workspace sign-in.');
+});
 
 test('storefront has no outside frame and admin navigation works at phone and desktop sizes', async ({ page }) => {
   await open(page);
@@ -15,7 +32,9 @@ test('storefront has no outside frame and admin navigation works at phone and de
   await page.getByRole('combobox', { name: 'Activity period' }).selectOption('7');
   for (const [name, heading] of [['Products', 'Products.'], ['Orders', 'Orders.'], ['Customers', 'Customers.'], ['Overview', 'Store overview.']]) {
     if (page.viewportSize()!.width < 981) await page.getByRole('button', { name: 'Open admin menu' }).click();
-    await page.getByRole('navigation', { name: 'Admin navigation' }).getByRole('link', { name, exact: true }).click();
+    // 'Orders' carries a live confirmed-order count badge (e.g. "Orders 20") now that the backend
+    // has real accumulated data, so match on the link's start rather than its exact full name.
+    await page.getByRole('navigation', { name: 'Admin navigation' }).getByRole('link', { name: new RegExp('^' + name) }).click();
     await expect(page.locator('main h1')).toHaveText(heading);
     await expect(page.getByRole('dialog')).toHaveCount(0);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1)).toBe(true);
@@ -25,6 +44,34 @@ test('storefront has no outside frame and admin navigation works at phone and de
   await page.getByRole('button', { name: 'Cancel', exact: true }).click();
   await page.getByRole('link', { name: 'View store', exact: true }).click();
   await expect(page.locator('.campaign-hero')).toBeVisible();
+});
+
+test('reports summarise orders in the selected period and export a CSV', async ({ page }) => {
+  await addProduct(page);
+  await bag(page);
+  await page.getByRole('button', { name: 'Continue to checkout' }).click();
+  await fillAddress(page.locator('.checkout-form'));
+  await page.getByRole('button', { name: 'Continue to payment' }).click();
+  await page.getByRole('button', { name: 'Review your order' }).click();
+  await page.getByRole('button', { name: /^Place demo order/ }).click();
+  await expect(page.locator('.confirmation')).toBeVisible();
+  await open(page, '/admin/reports');
+  await expect(page.locator('main h1')).toHaveText('Reports.');
+  // Reports are now live totals from a shared backend database (not per-test isolated local state),
+  // so assert the numbers are real/well-formed rather than an exact value another test could also affect.
+  await expect(page.locator('.ops-metrics article').first().locator('strong')).toHaveText(/^₹[\d,]+$/);
+  await expect(page.locator('.ops-metrics article').nth(1).locator('strong')).toHaveText(/^\d+$/);
+  await expect(page.locator('.ops-table tbody tr').first()).toContainText(new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }));
+  await page.getByRole('button', { name: 'Custom range' }).click();
+  await expect(page.getByLabel('From date')).toBeVisible();
+  await expect(page.getByLabel('To date')).toBeVisible();
+  await page.getByRole('button', { name: 'Last 30 days' }).click();
+  const downloading = page.waitForEvent('download');
+  await page.getByRole('button', { name: 'Export Excel', exact: true }).click();
+  const download = await downloading;
+  expect(download.suggestedFilename()).toMatch(/^ghoster-report-.*\.xlsx$/);
+  const bytes = await readFile((await download.path())!);
+  expect(bytes.subarray(0, 2).toString('latin1')).toBe('PK'); // .xlsx is a real zip archive, not CSV text
 });
 
 test('product search, pagination, status filter and CSV export work', async ({ page }) => {
@@ -123,10 +170,11 @@ test('create, validate, archive, restore and reset a product through the admin U
 
 test('admin manages orders and customer history while preserving purchased prices', async ({ page }) => {
   test.setTimeout(60000);
+  const email = uniqueEmail('admin-orders');
   await addProduct(page);
   await bag(page);
   await page.getByRole('button', { name: 'Continue to checkout' }).click();
-  await fillAddress(page.locator('.checkout-form'));
+  await fillAddress(page.locator('.checkout-form'), { 'Email address': email });
   await page.getByRole('button', { name: 'Continue to payment' }).click();
   await page.getByRole('button', { name: 'Review your order' }).click();
   await page.getByRole('button', { name: /^Place demo order/ }).click();
@@ -161,10 +209,8 @@ test('admin manages orders and customer history while preserving purchased price
   await expect(page.locator('.brand-splash')).toHaveCount(0);
   await expect(page.locator('main')).toContainText('This demo order was cancelled.');
   await open(page, '/admin/customers');
-  await page.getByRole('searchbox', { name: 'Search customers' }).fill('Chennai');
+  await page.getByRole('searchbox', { name: 'Search customers' }).fill(email);
   await expect(page.locator('.ops-table tbody tr')).toHaveCount(1);
-  await page.getByRole('link', { name: 'View orders for demo@example.com' }).click();
+  await page.getByRole('link', { name: 'View orders for ' + email }).click();
   await expect(page.locator('.ops-table tbody tr')).toContainText(id!);
-  await open(page, '/admin');
-  await expect(page.locator('.ops-metrics article').first()).toContainText('₹0');
 });

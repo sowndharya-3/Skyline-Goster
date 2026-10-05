@@ -9,6 +9,7 @@ import { Action, IconButton, Choice } from './ui';
 import { ShopPage, ProductPage, WishlistPage } from './shop';
 import { BagPage, CheckoutPage, ConfirmationPage, OrdersPage, AccountPage, InfoPage } from './pages';
 import { AdminPage } from './AdminPage';
+import { AdminLoginPage } from './AdminLoginPage';
 import { SplashScreen } from './SplashScreen';
 import { LoginPage } from './LoginPage';
 import { BrandLogo, HomePage, AboutPage, PackagingPage, UnseenPage, Signup } from './BrandPages';
@@ -61,7 +62,7 @@ function AddedDialog() {
 }
 function Shell() {
   const route = useRoute();
-  const { ready, dismissAdded } = useStore();
+  const { ready, dismissAdded, admin } = useStore();
   const [splash, setSplash] = useState(true);
   const [quick, setQuick] = useState<Product | null>(null);
   const path = route.split('?')[0];
@@ -75,7 +76,7 @@ function Shell() {
   else if (path === '/info/about') page = <AboutPage />;
   else if (path === '/packaging') page = <PackagingPage />;
   else if (path === '/unseen') page = <UnseenPage />;
-  else if (isAdmin) page = <AdminPage route={route} />;
+  else if (isAdmin) page = admin ? <AdminPage route={route} /> : <AdminLoginPage />;
   else if (path.startsWith('/product/')) page = <ProductPage key={path} id={path.split('/')[2]} onQuick={setQuick} />;
   else if (path === '/wishlist') page = <WishlistPage onQuick={setQuick} />;
   else if (path === '/bag') page = <BagPage />;

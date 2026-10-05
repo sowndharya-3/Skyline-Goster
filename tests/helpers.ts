@@ -54,6 +54,12 @@ export async function bag(page: Page) {
   await expect(page.getByRole('heading', { name: /^YOUR LOADOUT\./ })).toBeVisible();
 }
 
+// The backend is a real, shared, persistent database across test runs (not per-test local storage),
+// so any assertion that must match exactly one row needs a value no other run could also produce.
+export function uniqueEmail(prefix: string) {
+  return `${prefix}.${Date.now()}.${Math.random().toString(36).slice(2, 8)}@example.com`;
+}
+
 export async function fillAddress(scope: Page | Locator, overrides: Record<string, string> = {}) {
   const values = { 'Full name': 'Demo Customer', 'Mobile number': '9876543210', 'Email address': 'demo@example.com', 'PIN code': '600001', 'Flat, street and area': '12 Sample Street', 'City': 'Chennai', 'State': 'Tamil Nadu', ...overrides };
   for (const [name, value] of Object.entries(values)) await scope.getByRole('textbox', { name, exact: true }).fill(value);
@@ -71,4 +77,28 @@ export async function seed(page: Page, data: Record<string, unknown>) {
   await page.addInitScript(data => {
     localStorage.setItem('ghoster-prototype-v1', JSON.stringify({ cart: [], wishlist: [], user: null, orders: [], addresses: [], ...data }));
   }, data);
+}
+
+const API_BASE = 'http://localhost:8000';
+export const ADMIN_EMAIL = 'admin@ghosterstudio.com';
+export const ADMIN_PASSWORD = 'ghoster123';
+
+// Admin auth is a real JWT validated against the live backend on load, so a fake token
+// won't pass. Log in against the API directly (fast, no UI) and inject the real token.
+export async function seedAdmin(page: Page) {
+  const response = await fetch(API_BASE + '/api/auth/login', {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email: ADMIN_EMAIL, password: ADMIN_PASSWORD }),
+  });
+  if (!response.ok) throw new Error('seedAdmin: backend login failed — is the API running on ' + API_BASE + '?');
+  const { access_token } = await response.json();
+  await page.addInitScript(token => { try { sessionStorage.setItem('ghoster-admin-token-v1', token); } catch { /* Test can still sign in manually if storage is blocked. */ } }, access_token);
+}
+
+export async function adminSignIn(page: Page) {
+  await open(page, '/admin');
+  await page.getByLabel('Email', { exact: true }).fill(ADMIN_EMAIL);
+  await page.getByLabel('Password', { exact: true }).fill(ADMIN_PASSWORD);
+  await page.getByRole('button', { name: 'Sign in', exact: true }).click();
+  await expect(page.locator('main h1')).toHaveText('Store overview.');
 }

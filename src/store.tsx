@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { products as initialProducts, Product, sizes } from './catalog';
 import { toast } from 'sonner';
+import * as api from './api';
 
 export type Line = { id: string; size: string; qty: number; product?: Product };
 export type Address = { name: string; phone: string; email: string; street: string; city: string; state: string; pin: string };
@@ -10,6 +11,8 @@ type Data = { cart: Line[]; wishlist: string[]; user: { name: string; email: str
 const empty: Data = { cart: [], wishlist: [], user: null, orders: [], addresses: [] };
 const KEY = 'ghoster-prototype-v1';
 const CATALOG_KEY = 'ghoster-catalog-v1';
+const ADMIN_TOKEN_KEY = 'ghoster-admin-token-v1';
+export const ADMIN_DEMO_CREDENTIALS = { email: 'admin@ghosterstudio.com', password: 'ghoster123' };
 
 export function calculate(cart: Line[], coupon = '', catalog = initialProducts) {
   const subtotal = cart.reduce((n, l) => n + (catalog.find(p => p.id === l.id)?.price || 0) * l.qty, 0);
@@ -36,9 +39,19 @@ function useStoreState() {
   const [catalog, setCatalog] = useState<Product[]>(initialProducts);
   const [ready, setReady] = useState(false);
   const [added, setAdded] = useState<{ product: Product; size: string } | null>(null);
+  const [admin, setAdmin] = useState(false);
+  const [adminToken, setAdminToken] = useState<string | null>(null);
   const products = catalog.filter(p => !p.archived);
   const dismissAdded = () => setAdded(null);
   useEffect(() => {
+    (async () => {
+      let token: string | null = null;
+      try { token = sessionStorage.getItem(ADMIN_TOKEN_KEY); } catch { /* Admin session starts signed out if storage is unavailable. */ }
+      if (token) {
+        try { await api.adminMe(token); setAdmin(true); setAdminToken(token); }
+        catch { try { sessionStorage.removeItem(ADMIN_TOKEN_KEY); } catch { /* Nothing left to clear. */ } }
+      }
+    })();
     let loaded = initialProducts;
     try {
       const savedCatalog = JSON.parse(localStorage.getItem(CATALOG_KEY) || 'null');
@@ -46,6 +59,13 @@ function useStoreState() {
         && new Set(savedCatalog.map(p => p.id)).size === savedCatalog.length) loaded = savedCatalog;
     } catch { /* Keep the bundled catalogue if local data cannot be read. */ }
     setCatalog(loaded);
+    api.fetchProducts()
+      .then(live => {
+        // A locally saved catalogue (admin edits made in this demo browser) still wins over the live read.
+        try { if (JSON.parse(localStorage.getItem(CATALOG_KEY) || 'null')) return; } catch { /* fall through to live data */ }
+        if (live.length) setCatalog(live);
+      })
+      .catch(() => { /* Backend unreachable: keep the bundled catalogue so the storefront still works offline. */ });
     try {
       const saved = JSON.parse(localStorage.getItem(KEY) || 'null');
       if (saved && Array.isArray(saved.cart) && Array.isArray(saved.orders) && Array.isArray(saved.wishlist) && Array.isArray(saved.addresses)) {
@@ -75,11 +95,6 @@ function useStoreState() {
     setCatalog(initialProducts);
     try { localStorage.removeItem(CATALOG_KEY); } catch { /* The current session can still reset. */ }
   };
-  const updateOrderStatus = (id: string, status: string) => {
-    if (!orderStatuses.some(s => s === status)) return;
-    setData(d => ({ ...d, orders: d.orders.map(o => o.id === id ? { ...o, status } : o) }));
-    toast.success('Order status updated');
-  };
   const add = (product: Product, size: string, qty = 1) => {
     const p = products.find(item => item.id === product.id);
     if (!p || !p.sizes.includes(size) || !Number.isInteger(qty) || qty < 1) return false;
@@ -95,7 +110,19 @@ function useStoreState() {
   const quantity = (id: string, size: string, qty: number) => setData(d => ({ ...d, cart: d.cart.map(l => l.id === id && l.size === size ? { ...l, qty: Math.max(1, Math.min(10, qty)) } : l) }));
   const remove = (id: string, size: string) => setData(d => ({ ...d, cart: d.cart.filter(l => l.id !== id || l.size !== size) }));
   const toggleWish = (id: string) => setData(d => ({ ...d, wishlist: d.wishlist.includes(id) ? d.wishlist.filter(x => x !== id) : [...d.wishlist, id] }));
-  return { data, setData, ready, products, catalog, saveProduct, resetCatalog, updateOrderStatus, add, quantity, remove, toggleWish, added, dismissAdded };
+  const adminLogin = async (email: string, password: string) => {
+    try {
+      const { access_token } = await api.adminLogin(email.trim(), password);
+      setAdmin(true); setAdminToken(access_token);
+      try { sessionStorage.setItem(ADMIN_TOKEN_KEY, access_token); } catch { /* Session still unlocks for this render even if storage fails. */ }
+      return true;
+    } catch { return false; }
+  };
+  const adminLogout = () => {
+    setAdmin(false); setAdminToken(null);
+    try { sessionStorage.removeItem(ADMIN_TOKEN_KEY); } catch { /* Nothing left to clear. */ }
+  };
+  return { data, setData, ready, products, catalog, saveProduct, resetCatalog, add, quantity, remove, toggleWish, added, dismissAdded, admin, adminToken, adminLogin, adminLogout };
 }
 const Context = createContext<ReturnType<typeof useStoreState> | null>(null);
 export function StoreProvider({ children }: { children: React.ReactNode }) { const state = useStoreState(); return <Context.Provider value={state}>{children}</Context.Provider>; }

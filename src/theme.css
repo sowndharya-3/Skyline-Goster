@@ -275,7 +275,12 @@ input::placeholder{color:#898c80;opacity:1}
 .review-address{border-color:var(--line)}
 .confirmation h1{letter-spacing:1.3px}
 .confirmation>svg{color:var(--olive)}
-.confirmation-box,.order-card,.saved-address-card{border-color:var(--line)}
+/* The confirmation receipt uses a light surface inside the dark storefront. */
+.confirmation-box{background:var(--soft);color:#101010;border:1px solid var(--line)}
+.confirmation-box>span{color:#5a5a56}
+.confirmation-box>strong,.confirmation-box>div{color:#101010}
+.confirmation-box p{color:#4d4d48}
+.order-card,.saved-address-card{border-color:var(--line)}
 .status-label{background:#26351a;color:#c9d6b5}
 .order-timeline>.active{color:var(--olive)}
 .info-body h2{font-size:27px}

@@ -1,4 +1,4 @@
-import { test, expect, open, addProduct, bag, fillAddress, signIn } from './helpers';
+import { test, expect, open, addProduct, bag, fillAddress, signIn, seedAdmin } from './helpers';
 
 test('demo login validates details, persists the profile and signs out', async ({ page }) => {
   await open(page, '/login');
@@ -112,11 +112,14 @@ test('checkout validates addresses, review edits and changed payment clears a fa
   await expect(page.getByRole('button', { name: 'Preview a payment failure', exact: true })).toHaveCount(0);
   await page.getByRole('button', { name: /^Place demo order/ }).click();
   await expect(page.locator('.confirmation')).toContainText('Your demo order is confirmed.');
+  await expect(page.locator('.confirmation-box')).toHaveCSS('color', 'rgb(16, 16, 16)');
+  await expect(page.locator('.confirmation-box')).toHaveCSS('background-color', 'rgb(243, 243, 243)');
   await expect(page.locator('.confirmation-box')).toContainText('₹1,349');
 });
 
 for (const payment of ['UPI', 'Cards', 'Net banking', 'Cash on delivery']) {
   test(`${payment} demo checkout creates one persisted order and updates the dashboard`, async ({ page }) => {
+    await seedAdmin(page);
     await addProduct(page);
     await bag(page);
     await page.getByRole('button', { name: 'Continue to checkout' }).click();
@@ -142,11 +145,13 @@ for (const payment of ['UPI', 'Cards', 'Net banking', 'Cash on delivery']) {
     await expect(page.locator('.order-card')).toHaveCount(1);
     await page.getByRole('button', { name: 'View details', exact: true }).click();
     await expect(page.locator('main h1')).toHaveText('ORDER DETAILS.');
-    await open(page, '/admin');
-    await expect(page.locator('.ops-metrics article').nth(0)).toContainText('₹1,499');
-    await expect(page.locator('.ops-metrics article').nth(1)).toContainText('1 awaiting fulfilment');
-    await page.locator('.ops-recent-orders').getByRole('button', { name: orderId!, exact: true }).click();
+    // The admin dashboard now aggregates a shared backend database (not per-test local state), so
+    // verify this specific order reached it by id rather than asserting an exact revenue total.
+    await open(page, '/admin/orders');
+    await page.getByRole('searchbox', { name: 'Search orders or customers' }).fill(orderId!);
+    await page.getByRole('button', { name: 'Manage order ' + orderId }).click();
     await expect(page.getByRole('dialog')).toContainText(orderId!);
+    await expect(page.getByRole('dialog')).toContainText(payment);
     await page.getByRole('button', { name: 'Close details', exact: true }).click();
     await open(page, '/admin');
     await page.getByRole('link', { name: 'Manage products', exact: true }).click();

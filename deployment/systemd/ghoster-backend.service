@@ -1,0 +1,22 @@
+[Unit]
+Description=GHOSTER FastAPI backend (gunicorn + uvicorn workers)
+After=network.target postgresql.service
+
+[Service]
+Type=simple
+User=ghoster
+Group=ghoster
+WorkingDirectory=/var/www/ghoster/backend
+EnvironmentFile=/var/www/ghoster/backend/.env
+ExecStart=/var/www/ghoster/backend/.venv/bin/gunicorn -c gunicorn_conf.py app.main:app
+ExecReload=/bin/kill -s HUP $MAINPID
+Restart=on-failure
+RestartSec=5
+
+# Hardening (relax if deployment paths differ)
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+
+[Install]
+WantedBy=multi-user.target

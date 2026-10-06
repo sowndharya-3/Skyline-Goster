@@ -1,0 +1,43 @@
+# Nginx server block template for GHOSTER (frontend + API on one domain).
+# Copy to /etc/nginx/sites-available/ghoster.conf, replace YOURDOMAIN, then:
+#   ln -s /etc/nginx/sites-available/ghoster.conf /etc/nginx/sites-enabled/
+#   nginx -t && systemctl reload nginx
+# Run certbot afterwards to add the HTTPS server block (certbot --nginx -d YOURDOMAIN).
+
+upstream ghoster_backend {
+    server 127.0.0.1:8000;
+}
+
+server {
+    listen 80;
+    listen [::]:80;
+    server_name YOURDOMAIN www.YOURDOMAIN;
+
+    # React production build output (frontend/dist after `npm run build`).
+    root /var/www/ghoster/frontend/dist;
+    index index.html;
+
+    # Static assets: long cache, immutable filenames (Vite hashes them).
+    location /assets/ {
+        try_files $uri =404;
+        add_header Cache-Control "public, max-age=31536000, immutable";
+    }
+
+    # Backend API — proxied with the /api prefix intact (the app's own routes expect it).
+    location /api/ {
+        proxy_pass http://ghoster_backend;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_read_timeout 60s;
+    }
+
+    # Single-page app: client-side hash routing, always serve index.html.
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+
+    client_max_body_size 10M;
+}
